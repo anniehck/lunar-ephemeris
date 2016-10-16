@@ -2,7 +2,11 @@ body {
   font-family: 'Raleway', Helvetica, sans-serif;
   padding: 0;
   margin: 0;
+  background: url('http://eskipaper.com/images/nebula-wallpaper-hd-21.jpg') center no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   line-height: 1.5em;
+  color: #efeff3;
   .container {
     margin: 15px;
   }
@@ -11,6 +15,7 @@ body {
   }
   a {
     text-decoration: none;
+    color: #cfcfdb;
   }
   em {
     font-size: .8em;
@@ -34,12 +39,21 @@ body {
     color: $green;
   }
 }
+
 h2.space-fact {
   font-family: 'Montserrat', sans-serif;
+  color: white;
   width: 75%;
-  margin: 25px auto;
+  margin: 18% auto;
+  font-size: 1.8rem;
+  font-weight: normal;
   text-align: center;
   line-height: 1.6em;
   text-transform: lowercase;
   font-variant: small-caps;
+  transition: all 1s linear;
+  opacity: .65;
+  &:hover {
+    opacity: .85;
+  }
 }
