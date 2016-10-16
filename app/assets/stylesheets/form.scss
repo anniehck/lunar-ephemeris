@@ -2,8 +2,15 @@ form,
 #new_user {
   width: 75%;
   margin: 0 auto;
+  h2 {
+    text-align: center;
+  }
   #error_explanation {
     font-size: .8em;
+    margin-bottom: 20px;
+    li {
+      color: $red;
+    }
   }
   .material-icons {
     font-size: 1em;

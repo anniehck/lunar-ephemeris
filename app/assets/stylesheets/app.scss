@@ -22,4 +22,15 @@ body {
     border-radius: 5px;
     padding: 5px;
   }
+  p.alert,
+  p.notice {
+    font-size: .85em;
+    text-align: center;
+  }
+  p.alert {
+    color: $red;
+  }
+  p.notice {
+    color: $green;
+  }
 }
