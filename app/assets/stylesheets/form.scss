@@ -1,0 +1,33 @@
+form,
+#new_user {
+  width: 75%;
+  margin: 0 auto;
+  h2 {
+    text-align: center;
+  }
+  #error_explanation {
+    font-size: .8em;
+    margin-bottom: 20px;
+    li {
+      color: $red;
+    }
+  }
+  .material-icons {
+    font-size: 1em;
+    opacity: .65;
+  }
+  .field {
+    margin-bottom: 10px;
+    label {
+      text-transform: lowercase;
+      font-variant: small-caps;
+    }
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 80%;
+  }
+}
