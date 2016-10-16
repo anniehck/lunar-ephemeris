@@ -16,6 +16,7 @@ body {
   a {
     text-decoration: none;
     color: #cfcfdb;
+    text-transform: uppercase;
   }
   em {
     font-size: .8em;
@@ -37,6 +38,15 @@ body {
   }
   p.notice {
     color: $green;
+  }
+  .links ul {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    font-size: .8em;
+    li {
+      margin: 0 10px;
+    }
   }
 }
 
