@@ -34,3 +34,12 @@ body {
     color: $green;
   }
 }
+h2.space-fact {
+  font-family: 'Montserrat', sans-serif;
+  width: 75%;
+  margin: 25px auto;
+  text-align: center;
+  line-height: 1.6em;
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
