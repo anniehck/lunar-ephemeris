@@ -1,5 +1,7 @@
 # README
 
+[ ![Codeship Status for anniehck/moon-visualizer](https://app.codeship.com/projects/b92aa070-7566-0134-e20a-36b396ab9a96/status?branch=master)](https://app.codeship.com/projects/179371)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
