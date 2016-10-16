@@ -10,11 +10,11 @@ class Home extends Component {
 
   componentDidMount() {
     $.ajax({
-      url: "http://astrocast.herokuapp.com/bites"
+      method: 'GET',
+      url: "/api/v1/facts"
     })
     .done(data => {
-      let index = Math.floor(Math.random() * data.length);
-      this.setState({ randFact: data[index].name })
+      this.setState({ randFact: data.fact.name })
     });
   }
 
