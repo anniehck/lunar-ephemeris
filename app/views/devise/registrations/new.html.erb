@@ -6,21 +6,25 @@
 
   <div class="field">
     <%= f.label :username %> <em>(4 characters minimum)</em><br />
+    <i class="material-icons">face</i>
     <%= f.text_field :username, autofocus: true %>
   </div>
 
   <div class="field">
     <%= f.label :first_name %><br />
+    <i class="material-icons">looks_one</i>
     <%= f.text_field :first_name, autofocus: true %>
   </div>
 
   <div class="field">
     <%= f.label :last_name %><br />
+    <i class="material-icons">looks_two</i>
     <%= f.text_field :last_name, autofocus: true %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
+    <i class="material-icons">email</i>
     <%= f.email_field :email, autofocus: true %>
   </div>
 
@@ -29,11 +33,13 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
+    <i class="material-icons">lock_open</i>
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
+    <i class="material-icons">lock</i>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 

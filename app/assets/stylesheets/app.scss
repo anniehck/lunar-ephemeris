@@ -1,0 +1,25 @@
+body {
+  font-family: 'Raleway', Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5em;
+  .container {
+    margin: 15px;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  em {
+    font-size: .8em;
+  }
+  button,
+  input[type="submit"] {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+  }
+}
