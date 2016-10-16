@@ -15,3 +15,13 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+
+
+.env
+/coverage
+/public/uploads
+.sendgrid
+/node_modules
+/app/assets/javascripts/bundle.js
+/react/coverage
