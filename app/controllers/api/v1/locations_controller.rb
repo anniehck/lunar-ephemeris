@@ -8,4 +8,25 @@ class Api::V1::LocationsController < ApplicationController
       end
     end
   end
+
+  def new
+    @location = Location.new
+  end
+
+  def create
+    @location = Location.new(location_params)
+    @location.user = current_user
+    if @location.save
+      flash[:notice] = 'Success!'
+    else
+      @location.errors.any?
+      flash[:alert] = @location.errors.full_messages.join(', ')
+      render :new
+    end
+  end
+
+  protected
+  def location_params
+    params.require(:location).permit(:zip, :city, :state)
+  end
 end
