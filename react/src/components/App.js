@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import NavLink from './NavLink';
-// import { IndexLink } from 'react-router';
 
 export default React.createClass({
   render() {
