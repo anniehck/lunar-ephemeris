@@ -1,7 +1,9 @@
 form,
-#new_user {
+#new_user,
+#edit_user {
   width: 75%;
   margin: 0 auto;
+  color: #000;
   h2 {
     text-align: center;
   }
@@ -11,6 +13,9 @@ form,
     li {
       color: $red;
     }
+  }
+  i {
+    font-size: .8em;
   }
   .material-icons {
     font-size: 1em;

@@ -7,7 +7,7 @@ feature 'User creates new account' do
     visit root_path
     click_link 'Sign Up'
 
-    expect(page).to have_content('Create Account')
+    expect(page).to have_content 'Create Account'
 
     fill_in 'Username', with: user.username
     fill_in 'First name', with: user.first_name
@@ -18,9 +18,9 @@ feature 'User creates new account' do
     click_button 'Sign up'
 
     expect(user).to be_a(User)
-    expect(page).to have_content('You have signed up successfully.')
-    expect(page).to have_content("Signed in as #{user.username}")
-    expect(page).to have_content('Sign Out')
+    expect(page).to have_content 'You have signed up successfully.'
+    expect(page).to have_content "Signed in as #{user.username}"
+    expect(page).to have_content 'Sign Out'
   end
 
   scenario 'does not fill in all required information' do
@@ -34,10 +34,10 @@ feature 'User creates new account' do
     fill_in 'Password confirmation', with: user_2.password_confirmation
     click_button 'Sign up'
 
-    expect(page).to have_content('3 errors prohibited this user from being saved')
-    expect(page).to have_content('Username can\'t be blank')
-    expect(page).to have_content('Username is too short')
-    expect(page).to have_content('Last name can\'t be blank')
+    expect(page).to have_content '3 errors prohibited this user from being saved'
+    expect(page).to have_content 'Username can\'t be blank'
+    expect(page).to have_content 'Username is too short'
+    expect(page).to have_content 'Last name can\'t be blank'
   end
 
   scenario 'enters invalid email address' do
@@ -53,8 +53,8 @@ feature 'User creates new account' do
     fill_in 'Password confirmation', with: user_3.password_confirmation
     click_button 'Sign up'
 
-    expect(page).to have_content('1 error prohibited this user from being saved')
-    expect(page).to have_content('Email is invalid')
+    expect(page).to have_content '1 error prohibited this user from being saved'
+    expect(page).to have_content 'Email is invalid'
   end
 
   scenario 'password does not match password confirmation' do
@@ -70,8 +70,8 @@ feature 'User creates new account' do
     fill_in 'Password confirmation', with: user_4.password_confirmation
     click_button 'Sign up'
 
-    expect(page).to have_content('1 error prohibited this user from being saved')
-    expect(page).to have_content('Password confirmation doesn\'t match Password')
+    expect(page).to have_content '1 error prohibited this user from being saved'
+    expect(page).to have_content 'Password confirmation doesn\'t match Password'
   end
 
   scenario 'username is too short' do
@@ -87,7 +87,7 @@ feature 'User creates new account' do
     fill_in 'Password confirmation', with: user_5.password_confirmation
     click_button 'Sign up'
 
-    expect(page).to have_content('Username is too short (minimum is 4 characters)')
+    expect(page).to have_content 'Username is too short (minimum is 4 characters)'
   end
 
   scenario 'username has already been taken' do
@@ -104,6 +104,6 @@ feature 'User creates new account' do
     fill_in 'Password confirmation', with: user_6.password_confirmation
     click_button 'Sign up'
 
-    expect(page).to have_content('Username has already been taken')
+    expect(page).to have_content 'Username has already been taken'
   end
 end

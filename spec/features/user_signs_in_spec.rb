@@ -26,7 +26,6 @@ feature 'User signs in to account' do
     click_button 'Log in'
 
     expect(page).to have_content 'Invalid Email or password'
-
   end
 
 end
