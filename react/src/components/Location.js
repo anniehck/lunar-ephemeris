@@ -21,29 +21,15 @@ class Location extends Component {
     this.handleLat = this.handleLat.bind(this);
   }
 
-  // componentDidMount() {
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: "/api/v1/locations"
-  //   })
-  //   .done(data => {
-  //     this.setState({ locationData: data })
-  //   });
-  // }
-
   handleFormSubmit(event) {
-    debugger;
     let formData = { city: this.state.city, state: this.state.state, zip: this.state.zip, latitude: this.state.lat, longitude: this.state.lon };
-    debugger;
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
-      debugger;
       console.log('posted!');
     }).error(data => {
-      debugger;
       console.log(data);
     });
 
@@ -91,6 +77,9 @@ class Location extends Component {
     return(
       <div className="location content">
         <CurrentLocation />
+        <form onSubmit={this.handleFormSubmit}>
+          <input type="submit" value="Use this location" />
+        </form>
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}

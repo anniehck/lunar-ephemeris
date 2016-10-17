@@ -15,7 +15,6 @@ class CurrentLocation extends Component {
     })
     .done(data => {
       this.setState({ locationData: data })
-      debugger;
     });
   }
 
