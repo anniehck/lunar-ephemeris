@@ -1,5 +1,7 @@
 # Moon Visualizer
 [ ![Codeship Status for anniehck/moon-visualizer](https://app.codeship.com/projects/b92aa070-7566-0134-e20a-36b396ab9a96/status?branch=master)](https://app.codeship.com/projects/179371)
+[![Coverage Status](https://coveralls.io/repos/github/anniehck/moon-visualizer/badge.svg?branch=master)](https://coveralls.io/github/anniehck/moon-visualizer?branch=master)
+[![Code Climate](https://codeclimate.com/github/anniehck/moon-visualizer/badges/gpa.svg)](https://codeclimate.com/github/anniehck/moon-visualizer)
 
 Your app description, here.
 

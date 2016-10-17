@@ -21,6 +21,7 @@ end
 group :test do
   gem 'launchy', require: false
   gem 'database_cleaner'
+  gem 'coveralls', require: false
 end
 
 group :production do
