@@ -9,12 +9,16 @@ class Location extends Component {
       location: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      lon: '',
+      lat: ''
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleZip = this.handleZip.bind(this);
     this.handleState = this.handleState.bind(this);
     this.handleCity = this.handleCity.bind(this);
+    this.handleLon = this.handleLon.bind(this);
+    this.handleLat = this.handleLat.bind(this);
   }
 
   // componentDidMount() {
@@ -28,7 +32,7 @@ class Location extends Component {
   // }
 
   handleFormSubmit(event) {
-    let formData = { city: this.state.city, state: this.state.city, zip: this.state.zip };
+    let formData = { city: this.state.city, state: this.state.city, zip: this.state.zip, latitude: this.state.lat, longitude: this.state.lon };
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
@@ -43,7 +47,9 @@ class Location extends Component {
     let newLocation = {
       city: this.state.city,
       state: this.state.state,
-      zip: this.state.zip
+      zip: this.state.zip,
+      lat: this.state.lat,
+      lon: this.state.lon
     }
 
     this.state.city = ''
@@ -67,6 +73,16 @@ class Location extends Component {
     this.setState({ state: newState });
   }
 
+  handleLat(event) {
+    let newLat = event.target.value;
+    this.setState({ lat: newLat });
+  }
+
+  handleLon(event) {
+    let newLon = event.target.value;
+    this.setState({ lon: newLon });
+  }
+
 
   render() {
     return(
@@ -75,9 +91,16 @@ class Location extends Component {
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}
+          city={this.state.city}
+          state={this.state.state}
+          zip={this.state.zip}
+          lat={this.state.lat}
+          lon={this.state.lon}
           handleCity={this.handleCity}
           handleState={this.handleState}
           handleZip={this.handleZip}
+          handleLat={this.handleLat}
+          handleLon={this.handleLon}
         />
       </div>
     )

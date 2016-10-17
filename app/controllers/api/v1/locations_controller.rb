@@ -21,12 +21,11 @@ class Api::V1::LocationsController < ApplicationController
     else
       @location.errors.any?
       flash[:alert] = @location.errors.full_messages.join(', ')
-      render :new
     end
   end
 
   protected
   def location_params
-    params.require(:location).permit(:zip, :city, :state)
+    params.require(:location).permit(:zip, :city, :state, :latitude, :longitude)
   end
 end

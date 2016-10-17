@@ -28,6 +28,21 @@ const LocationForm = props => {
         onChange={props.handleZip}
       /><br />
 
+      <label>Latitude</label>
+      <input
+        type="text"
+        placeholder="latitude"
+        value={props.lat}
+        onChange={props.handleLat}
+      /><br />
+      <label>Longitude</label>
+      <input
+        type="text"
+        placeholder="longitude"
+        value={props.lon}
+        onChange={props.handleLon}
+      /><br />
+
         <input type="submit" value="Check Location" />
       </form>
   );
