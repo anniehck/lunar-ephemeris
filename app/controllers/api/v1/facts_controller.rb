@@ -1,5 +1,4 @@
 require 'httparty'
-require 'pry'
 class Api::V1::FactsController < ApplicationController
   def index
     response = HTTParty.get('http://astrocast.herokuapp.com/bites')
