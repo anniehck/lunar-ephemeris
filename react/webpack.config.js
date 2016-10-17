@@ -4,7 +4,8 @@ var config = {
   },
   output: {
     path: './app/assets/javascripts',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [
