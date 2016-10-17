@@ -16,9 +16,11 @@ class Api::V1::LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
     @location.user = current_user
+  
     if @location.save
       flash[:notice] = 'Success!'
     else
+
       @location.errors.any?
       flash[:alert] = @location.errors.full_messages.join(', ')
     end

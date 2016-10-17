@@ -32,7 +32,9 @@ class Location extends Component {
   // }
 
   handleFormSubmit(event) {
-    let formData = { city: this.state.city, state: this.state.city, zip: this.state.zip, latitude: this.state.lat, longitude: this.state.lon };
+    debugger;
+    let formData = { city: this.state.city, state: this.state.state, zip: this.state.zip, latitude: this.state.lat, longitude: this.state.lon };
+    debugger;
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
@@ -41,7 +43,8 @@ class Location extends Component {
       debugger;
       console.log('posted!');
     }).error(data => {
-      console.log('FAIL');
+      debugger;
+      console.log(data);
     });
 
     let newLocation = {
