@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resource :location
   resource :about
+  resource :moon
 
   namespace :api do
     namespace :v1 do
