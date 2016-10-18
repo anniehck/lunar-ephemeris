@@ -8,6 +8,7 @@ export default React.createClass({
       <div>
         <ul role="nav">
           <li><NavLink to="/" activeClassName="active" onlyActiveOnIndex={true}>Home</NavLink></li>
+          <li><NavLink to="/location">Location</NavLink></li>
           <li><NavLink to="/about">About</NavLink></li>
         </ul>
 

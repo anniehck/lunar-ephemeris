@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CurrentLocation from './CurrentLocation';
 import LocationForm from './LocationForm';
+import { Link } from 'react-router';
 
 class Location extends Component {
   constructor(props) {
