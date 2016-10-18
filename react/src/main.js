@@ -6,7 +6,7 @@ import App from './components/App';
 import Home from './components/Home';
 import Location from './components/Location';
 import About from './components/About';
-import LocationStats from './components/LocationStats';
+import MoonStats from './components/MoonStats';
 
 $(function() {
   ReactDOM.render(
@@ -15,7 +15,7 @@ $(function() {
         <IndexRoute component={Home} />
         <Route path="/location" component={Location} />
         <Route path="/about" component={About} />
-        <Route path="/data" component={LocationStats} />
+        <Route path="/moon" component={MoonStats} />
       </Route>
     </Router>
     ,
