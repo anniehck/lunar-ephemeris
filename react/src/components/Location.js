@@ -79,7 +79,9 @@ class Location extends Component {
       <div className="location content">
         <CurrentLocation />
         <form onSubmit={this.handleFormSubmit}>
-          <input type="submit" value="Use this location" />
+          <div className="submit">
+            <input type="submit" value="Use this location" />
+          </div>
         </form>
 
         <LocationForm
