@@ -34,7 +34,7 @@ class MoonStats extends Component {
         <p>{date}</p>
         <p>The moon rises at {riseTime} and sets at {setTime}</p>
         <p className="phase">{this.state.name}</p>
-        <p>illumination at {this.state.illum}</p>
+        <p>illumination at <span className="blue">{this.state.illum}</span></p>
       </div>
     )
   }
