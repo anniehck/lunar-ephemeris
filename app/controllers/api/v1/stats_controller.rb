@@ -14,7 +14,7 @@ class Api::V1::StatsController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render json: { data: response['response'] }
+        render json: { data: response['response'][0] }
       end
     end
   end

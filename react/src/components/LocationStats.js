@@ -15,11 +15,14 @@ class LocationStats extends Component {
       url: "/api/v1/stats"
     })
     .done(data => {
-      this.setState({ data: data.data })
+      debugger;
+      this.setState({ data: data.data.name })
     });
   }
 
   render() {
+    let data = this.state.data;
+
     return(
       <div>
         {this.state.data}
