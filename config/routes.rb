@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :facts, only: [:index]
       resources :locations
+      resources :stats, only: [:index]
     end
   end
 end
