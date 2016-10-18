@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resource :location
+  resource :about
+
   namespace :api do
     namespace :v1 do
       resources :facts, only: [:index]
