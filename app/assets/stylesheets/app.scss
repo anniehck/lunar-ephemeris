@@ -2,21 +2,32 @@ body {
   font-family: 'Raleway', Helvetica, sans-serif;
   padding: 0;
   margin: 0;
-  background: url('http://eskipaper.com/images/nebula-wallpaper-hd-21.jpg') center no-repeat;
+  background:
+    linear-gradient(
+      rgba(187, 218, 227, 0),
+      rgba(187, 218, 227, .3)
+    ),
+    url('http://eskipaper.com/images/nebula-wallpaper-hd-21.jpg') center no-repeat;
   background-attachment: fixed;
   background-size: cover;
   line-height: 1.5em;
-  color: #efeff3;
+  color: #000;
   .container {
-    margin: 15px;
+    margin: 0;
   }
   ul {
     list-style: none;
   }
   a {
     text-decoration: none;
-    color: #cfcfdb;
+    color: #000;
     text-transform: uppercase;
+    padding-bottom: 5px;
+    transition: all 1s linear;
+    &:hover {
+      border-bottom: 1px solid #252b2d;
+      color: $bright-blue2;
+    }
   }
   em {
     font-size: .8em;
@@ -47,20 +58,28 @@ body {
     li {
       margin: 0 10px;
     }
+    span.username {
+      color: $bright-blue2;
+      letter-spacing: 1.1px;
+      margin-left: 3px;
+    }
   }
+}
+#navbar {
+  display: flex;
+  justify-content: space-between;
 }
 .content {
   width: 75%;
   margin: 0 auto;
 }
 .user-show {
-  // text-align: center;
   margin: 15% auto;
 }
 
 h2.space-fact {
   font-family: 'Montserrat', sans-serif;
-  color: white;
+  color: #d0f3ed;
   width: 75%;
   margin: 18% auto;
   font-size: 1.8rem;
@@ -75,6 +94,15 @@ h2.space-fact {
     opacity: .85;
   }
 }
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  font-size: .85em;
+  margin: 0 15px 35px;
+  li {
+    padding: 0 10px;
+  }
+}
 .active {
-  color: white;
+  color: $bright-blue2;
 }

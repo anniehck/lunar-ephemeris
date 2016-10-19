@@ -14,8 +14,8 @@ feature 'User signs in to account' do
 
     expect(page).to have_content 'Signed in successfully'
     expect(page).to have_content "Signed in as #{user.username}"
-    expect(page).to have_link 'My Account'
-    expect(page).to have_link 'Sign Out'
+    expect(page).to have_link 'face'
+    expect(page).to have_link 'close'
   end
 
   scenario 'unauthenticated user fills in invalid information' do

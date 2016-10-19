@@ -37,17 +37,29 @@ form,
     width: 80%;
     background: none;
   }
+  input[type="submit"] {
+    background-color: rgba(255, 255, 255, .5);
+    border: none;
+    width: 90%;
+  }
+  .actions,
   .submit {
     width: 30%;
     margin: 0 auto;
   }
 }
-#flash {
+.link-bottom {
   text-align: center;
-  padding: 15px 0;
+  margin: 20px 0;
+  a { font-size: .85em; }
 }
+// #flash {
+//   text-align: center;
+//   padding: 0;
+// }
 .flash {
   text-align: center;
-  padding: 25px 0;
-  color: $red;
+  padding: 15px 0 0 15px;
+  font-size: .85em;
+  color: #c0efe7;
 }
