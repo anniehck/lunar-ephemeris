@@ -14,9 +14,21 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new(location_params)
+    aeris_key = ENV["AERIS_CLIENT_ID"]
+    aeris_secret = ENV["AERIS_CLIENT_SECRET"]
+
+    location = params['location']
+
+    response = HTTParty.get("http://api.aerisapi.com/sunmoon?p=#{location['city']},#{location['state']}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
+
+    data = response['response'][0]
+
+    location['latitude'] = data['loc']['lat']
+    location['longitude'] = data['loc']['long']
+
+    @location = Location.new(location.permit!)
     @location.user = current_user
-    # @location = @location['latitude'].truncate(5).to_s
+
     if @location.save
       flash[:notice] = 'Success!'
     else
@@ -26,7 +38,7 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   protected
-  def location_params
-    params.require(:location).permit(:zip, :city, :state, :latitude, :longitude)
-  end
+  # def location_params
+  #   params.require(:location).permit!
+  # end
 end

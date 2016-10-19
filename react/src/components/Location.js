@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CurrentLocation from './CurrentLocation';
 import LocationForm from './LocationForm';
+import { Link } from 'react-router';
 
 class Location extends Component {
   constructor(props) {
@@ -11,14 +12,11 @@ class Location extends Component {
       state: '',
       zip: '',
       lon: '',
-      lat: ''
+      lat: '',
+      flash: ''
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleZip = this.handleZip.bind(this);
-    this.handleState = this.handleState.bind(this);
-    this.handleCity = this.handleCity.bind(this);
-    this.handleLon = this.handleLon.bind(this);
-    this.handleLat = this.handleLat.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleFormSubmit(event) {
@@ -28,8 +26,12 @@ class Location extends Component {
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
+      let message = 'Success!';
+      this.setState({ flash: message });
       console.log('posted!');
     }).error(data => {
+      let message = 'Invalid fields';
+      this.setState({ flash: message });
       console.log(data);
     });
 
@@ -47,39 +49,25 @@ class Location extends Component {
     event.preventDefault();
   }
 
-  handleZip(event) {
-    let newZip = event.target.value;
-    this.setState({ zip: newZip });
+  handleChange(event) {
+    let nextState = {};
+    nextState[event.target.name] = event.target.value;
+    this.setState(nextState);
   }
-
-  handleCity(event) {
-    let newCity = event.target.value;
-    this.setState({ city: newCity });
-  }
-
-  handleState(event) {
-    let newState = event.target.value;
-    this.setState({ state: newState });
-  }
-
-  handleLat(event) {
-    let newLat = event.target.value;
-    this.setState({ lat: newLat });
-  }
-
-  handleLon(event) {
-    let newLon = event.target.value;
-    this.setState({ lon: newLon });
-  }
-
 
   render() {
+    let flash = $('#flash').text();
+
     return(
       <div className="location content">
         <CurrentLocation />
         <form onSubmit={this.handleFormSubmit}>
-          <input type="submit" value="Use this location" />
+          <div className="submit">
+            <input type="submit" value="Use this location" />
+          </div>
         </form>
+
+        <p className="flash">{this.state.flash}</p>
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}
@@ -88,11 +76,7 @@ class Location extends Component {
           zip={this.state.zip}
           lat={this.state.lat}
           lon={this.state.lon}
-          handleCity={this.handleCity}
-          handleState={this.handleState}
-          handleZip={this.handleZip}
-          handleLat={this.handleLat}
-          handleLon={this.handleLon}
+          handleChange={this.handleChange}
         />
       </div>
     )

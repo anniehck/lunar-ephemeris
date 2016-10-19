@@ -22,7 +22,8 @@ form,
     opacity: .65;
   }
   .field {
-    margin-bottom: 10px;
+    width: 100%;
+    margin: 10px auto;
     label {
       text-transform: lowercase;
       font-variant: small-caps;
@@ -32,8 +33,21 @@ form,
   input[type="email"],
   input[type="password"] {
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #000;
     width: 80%;
     background: none;
   }
+  .submit {
+    width: 30%;
+    margin: 0 auto;
+  }
+}
+#flash {
+  text-align: center;
+  padding: 15px 0;
+}
+.flash {
+  text-align: center;
+  padding: 25px 0;
+  color: $red;
 }
