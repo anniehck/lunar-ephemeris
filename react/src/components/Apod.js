@@ -19,7 +19,6 @@ class Apod extends Component {
       url: "/api/v1/apods"
     })
     .done(data => {
-      debugger;
       this.setState({
         date: data.apod.date,
         title: data.apod.title,
@@ -33,12 +32,12 @@ class Apod extends Component {
   render() {
     return(
       <div className="apod">
-      <h3>NASA Astronomy Picture of the Day</h3>
+      <h3 className="nasa-title">NASA Astronomy Picture of the Day</h3>
         <h2 className="space-fact">{this.state.title}</h2>
         <img src={this.state.url} className="apod" />
-        <p>{this.state.date}</p>
         <p>{this.state.explanation}</p>
-        <p>{this.state.copyright}</p>
+        <p className="footer">
+        {this.state.date}<br />{this.state.copyright}</p>
       </div>
     )
   }

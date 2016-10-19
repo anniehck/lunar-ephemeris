@@ -1,10 +1,27 @@
 .apod {
   width: 100%;
+  text-align: center;
   h2.space-fact {
-    margin: 15px 0;
+    color: rgba(0,0,0,.85);
+    margin: 15px auto;
+    &:hover {
+      letter-spacing: 1.3px;
+    }
+  }
+  h3.nasa-title {
+    font-size: .9em;
+  }
+  img.apod {
+    margin: 20px 0;
   }
   p {
+    width: 80%;
     font-family: 'Poppins', sans-serif;
     font-size: .8em;
+    text-align: left;
+    margin: 15px auto;
+  }
+  p.footer {
+    text-align: right;
   }
 }
