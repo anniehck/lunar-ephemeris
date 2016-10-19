@@ -26,7 +26,7 @@ body {
     transition: all 1s linear;
     &:hover {
       border-bottom: 1px solid #252b2d;
-      color: #c8e1e8;
+      color: $bright-blue2;
     }
   }
   em {
@@ -58,6 +58,11 @@ body {
     li {
       margin: 0 10px;
     }
+    span.username {
+      color: $bright-blue2;
+      letter-spacing: 1.1px;
+      margin-left: 3px;
+    }
   }
 }
 .content {
@@ -85,6 +90,15 @@ h2.space-fact {
     opacity: .85;
   }
 }
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  font-size: .85em;
+  margin: 0 15px 35px;
+  li {
+    padding: 0 10px;
+  }
+}
 .active {
-  color: white;
+  color: $bright-blue2;
 }
