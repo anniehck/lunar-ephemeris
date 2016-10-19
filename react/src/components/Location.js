@@ -12,7 +12,8 @@ class Location extends Component {
       state: '',
       zip: '',
       lon: '',
-      lat: ''
+      lat: '',
+      flash: ''
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleZip = this.handleZip.bind(this);
@@ -29,8 +30,12 @@ class Location extends Component {
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
+      let message = $('#flash').text();
+      this.setState({ flash: message });
       console.log('posted!');
     }).error(data => {
+      let message = $('#flash').text();
+      this.setState({ flash: message });
       console.log(data);
     });
 
@@ -88,9 +93,7 @@ class Location extends Component {
           </div>
         </form>
 
-        {alert}
-        {notice}
-        {flash}
+        {this.state.flash}
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}
