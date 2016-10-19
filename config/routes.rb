@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :facts, only: [:index]
       resources :locations
       resources :stats, only: [:index]
+      resources :apods, only: [:index]
     end
   end
 end
