@@ -26,12 +26,9 @@ class Api::V1::LocationsController < ApplicationController
     location['latitude'] = data['loc']['lat']
     location['longitude'] = data['loc']['long']
 
-    binding.pry
-
-    @location = Location.new(location)
+    @location = Location.new(location.permit!)
     @location.user = current_user
 
-    binding.pry
     if @location.save
       flash[:notice] = 'Success!'
     else
@@ -40,8 +37,8 @@ class Api::V1::LocationsController < ApplicationController
     end
   end
 
-  # protected
+  protected
   # def location_params
-  #   params.require(:location).permit(:zip, :city, :state, :latitude, :longitude)
+  #   params.require(:location).permit!
   # end
 end
