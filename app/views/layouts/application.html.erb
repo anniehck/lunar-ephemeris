@@ -18,13 +18,11 @@
     <div class="container">
       <!-- <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p> -->
-
       <div id='flash' class="flash container">
       <% flash.each do |key, value| %>
         <%= value %>
       <% end %>
       </div>
-
 
       <%= yield %>
     </div>

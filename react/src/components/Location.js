@@ -26,11 +26,11 @@ class Location extends Component {
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
-      let message = $('#flash').text();
+      let message = 'Success!';
       this.setState({ flash: message });
       console.log('posted!');
     }).error(data => {
-      let message = $('#flash').text();
+      let message = 'Invalid fields';
       this.setState({ flash: message });
       console.log(data);
     });
@@ -56,10 +56,7 @@ class Location extends Component {
   }
 
   render() {
-    let alert = $('#alert').val();
-    let notice = $('#notice').val();
     let flash = $('#flash').text();
-    debugger;
 
     return(
       <div className="location content">
@@ -70,7 +67,7 @@ class Location extends Component {
           </div>
         </form>
 
-        {this.state.flash}
+        <p className="flash">{this.state.flash}</p>
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}
