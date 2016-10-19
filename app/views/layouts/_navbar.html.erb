@@ -1,4 +1,10 @@
 <nav id="navbar">
+  <div id='flash' class="flash container">
+  <% flash.each do |key, value| %>
+    <%= value %>
+  <% end %>
+  </div>
+  
     <div class="links">
       <ul>
         <% if user_signed_in? %>
