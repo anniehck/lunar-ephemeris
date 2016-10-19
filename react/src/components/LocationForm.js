@@ -9,7 +9,8 @@ const LocationForm = props => {
       <input
         type="text"
         value={props.city}
-        onChange={props.handleCity}
+        name='city'
+        onChange={props.handleChange}
       /></div>
 
       <div className="field">
@@ -17,7 +18,8 @@ const LocationForm = props => {
       <input
         type="text"
         value={props.state}
-        onChange={props.handleState}
+        name='state'
+        onChange={props.handleChange}
       /></div>
 
       <div className="field">
@@ -25,23 +27,8 @@ const LocationForm = props => {
       <input
         type="text"
         value={props.zip}
-        onChange={props.handleZip}
-      /></div>
-
-      <div className="field">
-      <label>Latitude</label><br />
-      <input
-        type="text"
-        value={props.lat}
-        onChange={props.handleLat}
-      /></div>
-
-      <div className="field">
-      <label>Longitude</label><br />
-      <input
-        type="text"
-        value={props.lon}
-        onChange={props.handleLon}
+        name='zip'
+        onChange={props.handleChange}
       /></div>
 
       <div className="submit">

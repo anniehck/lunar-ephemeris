@@ -16,11 +16,7 @@ class Location extends Component {
       flash: ''
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleZip = this.handleZip.bind(this);
-    this.handleState = this.handleState.bind(this);
-    this.handleCity = this.handleCity.bind(this);
-    this.handleLon = this.handleLon.bind(this);
-    this.handleLat = this.handleLat.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleFormSubmit(event) {
@@ -53,36 +49,17 @@ class Location extends Component {
     event.preventDefault();
   }
 
-  handleZip(event) {
-    let newZip = event.target.value;
-    this.setState({ zip: newZip });
+  handleChange(event) {
+    let nextState = {};
+    nextState[event.target.name] = event.target.value;
+    this.setState(nextState);
   }
-
-  handleCity(event) {
-    let newCity = event.target.value;
-    this.setState({ city: newCity });
-  }
-
-  handleState(event) {
-    let newState = event.target.value;
-    this.setState({ state: newState });
-  }
-
-  handleLat(event) {
-    let newLat = event.target.value;
-    this.setState({ lat: newLat });
-  }
-
-  handleLon(event) {
-    let newLon = event.target.value;
-    this.setState({ lon: newLon });
-  }
-
 
   render() {
     let alert = $('#alert').val();
     let notice = $('#notice').val();
     let flash = $('#flash').text();
+    debugger;
 
     return(
       <div className="location content">
@@ -102,11 +79,7 @@ class Location extends Component {
           zip={this.state.zip}
           lat={this.state.lat}
           lon={this.state.lon}
-          handleCity={this.handleCity}
-          handleState={this.handleState}
-          handleZip={this.handleZip}
-          handleLat={this.handleLat}
-          handleLon={this.handleLon}
+          handleChange={this.handleChange}
         />
       </div>
     )
