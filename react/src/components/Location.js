@@ -75,6 +75,10 @@ class Location extends Component {
 
 
   render() {
+    let alert = $('#alert').val();
+    let notice = $('#notice').val();
+    let flash = $('#flash').text();
+
     return(
       <div className="location content">
         <CurrentLocation />
@@ -83,6 +87,10 @@ class Location extends Component {
             <input type="submit" value="Use this location" />
           </div>
         </form>
+
+        {alert}
+        {notice}
+        {flash}
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}
