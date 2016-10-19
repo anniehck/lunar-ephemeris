@@ -53,12 +53,13 @@ form,
   margin: 20px 0;
   a { font-size: .85em; }
 }
-#flash {
-  text-align: center;
-  padding: 0;
-}
+// #flash {
+//   text-align: center;
+//   padding: 0;
+// }
 .flash {
   text-align: center;
-  padding: 25px 0;
-  color: $red;
+  padding: 15px 0 0 15px;
+  font-size: .85em;
+  color: #c0efe7;
 }

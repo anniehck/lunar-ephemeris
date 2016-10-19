@@ -20,7 +20,7 @@ feature 'User creates new account' do
     expect(user).to be_a(User)
     expect(page).to have_content 'You have signed up successfully.'
     expect(page).to have_content "Signed in as #{user.username}"
-    expect(page).to have_content 'Sign Out'
+    expect(page).to have_content 'close'
   end
 
   scenario 'does not fill in all required information' do
