@@ -37,10 +37,21 @@ form,
     width: 80%;
     background: none;
   }
+  input[type="submit"] {
+    background-color: rgba(255, 255, 255, .5);
+    border: none;
+    width: 90%;
+  }
+  .actions,
   .submit {
     width: 30%;
     margin: 0 auto;
   }
+}
+.link-bottom {
+  text-align: center;
+  margin: 20px 0;
+  a { font-size: .85em; }
 }
 #flash {
   text-align: center;
