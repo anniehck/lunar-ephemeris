@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Location from './components/Location';
 import About from './components/About';
 import MoonStats from './components/MoonStats';
+import Apod from './components/Apod';
 
 $(function() {
   ReactDOM.render(
@@ -16,6 +17,7 @@ $(function() {
         <Route path="/location" component={Location} />
         <Route path="/about" component={About} />
         <Route path="/moon" component={MoonStats} />
+        <Route path="/apod" component={Apod} />
       </Route>
     </Router>
     ,
