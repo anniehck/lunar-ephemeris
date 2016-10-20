@@ -88,10 +88,16 @@ h2.space-fact {
   line-height: 1.6em;
   text-transform: lowercase;
   font-variant: small-caps;
+  animation: glow 2s infinite alternate;
   transition: all 1s linear;
-  opacity: .65;
+  opacity: .6;
   &:hover {
     opacity: .85;
+  }
+}
+@keyframes glow {
+  to {
+    opacity: 1;
   }
 }
 .navbar {
