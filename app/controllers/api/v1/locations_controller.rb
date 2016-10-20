@@ -1,26 +1,19 @@
 require 'httparty'
 class Api::V1::LocationsController < ApplicationController
   def index
-    @geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
+    geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
 
-    latitude = @geocoder_data['geometry']['location']['lat']
-    longitude = @geocoder_data['geometry']['location']['lng']
-    city = @geocoder_data['address_components'][4]['long_name']
-    region = @geocoder_data['address_components'][6]['short_name']
-    zip = @geocoder_data['address_components'][-2]['short_name']
+    latitude = geocoder_data['geometry']['location']['lat']
+    longitude = geocoder_data['geometry']['location']['lng']
+    city = geocoder_data['address_components'][4]['long_name']
+    region = geocoder_data['address_components'][6]['short_name']
+    zip = geocoder_data['address_components'][-2]['short_name']
 
     respond_to do |format|
       format.json do
         render json: { latitude: latitude, longitude: longitude, city: city, state: region, zip: zip }
       end
     end
-
-    # response = HTTParty.get('http://ip-api.com/json')
-    # respond_to do |format|
-    #   format.json do
-    #     render json: { latitude: response['lat'], longitude: response['lon'], city: response['city'], state: response['region'], zip: response['zip'] }
-    #   end
-    # end
   end
 
   def new
