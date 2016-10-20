@@ -9,7 +9,7 @@ import About from './components/About';
 import MoonStats from './components/MoonStats';
 import Apod from './components/Apod';
 
-$(function() {
+$(document).ready.function() {
   ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
@@ -21,6 +21,6 @@ $(function() {
       </Route>
     </Router>
     ,
-    document.getElementById('app')
+    document.getElementById('app');
   );
 });

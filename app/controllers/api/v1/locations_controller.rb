@@ -5,9 +5,19 @@ class Api::V1::LocationsController < ApplicationController
 
     latitude = geocoder_data['geometry']['location']['lat'].round(4)
     longitude = geocoder_data['geometry']['location']['lng'].round(4)
-    city = geocoder_data['address_components'][4]['long_name']
-    region = geocoder_data['address_components'][6]['short_name']
-    zip = geocoder_data['address_components'][-2]['short_name']
+
+    place = geocoder_data['address_components']
+
+    city = ''
+    region = ''
+    zip = ''
+    place.each do |p|
+      p.each do |key, val|
+        city = p['long_name'] if val.include?('locality') || val.include?('administrative_area_level_2')
+        region = p['long_name'] if val.include?('administrative_area_level_1')
+        zip = p['short_name'] if val.include?('postal_code')
+      end
+    end
 
     respond_to do |format|
       format.json do
