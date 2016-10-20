@@ -3,8 +3,8 @@ class Api::V1::LocationsController < ApplicationController
   def index
     geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
 
-    latitude = geocoder_data['geometry']['location']['lat']
-    longitude = geocoder_data['geometry']['location']['lng']
+    latitude = geocoder_data['geometry']['location']['lat'].round(4)
+    longitude = geocoder_data['geometry']['location']['lng'].round(4)
     city = geocoder_data['address_components'][4]['long_name']
     region = geocoder_data['address_components'][6]['short_name']
     zip = geocoder_data['address_components'][-2]['short_name']
