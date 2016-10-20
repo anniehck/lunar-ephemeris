@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @client_ip = remote_ip()
+    @city = request.location.city
   end
 
   def destroy
