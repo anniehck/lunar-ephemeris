@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
 
   validates :city, presence: true
   validates :state, presence: true
-  validates :zip, presence: true
-  validates :latitude, numericality: true
-  validates :longitude, numericality: true
+  validates :zip, presence: true, format: { with: /\d{5}/, message: "US zipcode must be 5 digits" }
+  validates :latitude, presence: true, numericality: true
+  validates :longitude, presence: true, numericality: true
 end

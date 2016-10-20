@@ -5,8 +5,22 @@ class CurrentLocation extends Component {
     super(props);
     this.state = {
       locationData: [],
+      latitude: '',
+      longitude: '',
+      error: ''
     };
+    let options = { timeout: 25000, enableHighAccuracy: true };
+    navigator.geolocation.watchPosition(this.updateLocation.bind(this), this.locationError.bind(this), options);
   }
+
+  updateLocation(data) {
+    this.setState({ latitude: data.coords.latitude, longitude: data.coords.longitude })
+  }
+
+  locationError(error) {
+    this.setState({ error: error })
+  }
+
 
   componentDidMount() {
     $.ajax({
@@ -16,6 +30,7 @@ class CurrentLocation extends Component {
     .done(data => {
       this.setState({ locationData: data })
     });
+
   }
 
   render() {

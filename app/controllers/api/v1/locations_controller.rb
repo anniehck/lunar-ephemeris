@@ -26,7 +26,7 @@ class Api::V1::LocationsController < ApplicationController
     location['latitude'] = data['loc']['lat']
     location['longitude'] = data['loc']['long']
 
-    @location = Location.new(location.permit!)
+    @location = Location.new(location_params)
     @location.user = current_user
 
     if @location.save
@@ -38,7 +38,7 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   protected
-  # def location_params
-  #   params.require(:location).permit!
-  # end
+  def location_params
+    params.require(:location).permit(:city, :state, :zip, :latitude, :longitude)
+  end
 end
