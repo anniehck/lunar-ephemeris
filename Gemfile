@@ -7,6 +7,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'devise'
 gem 'httparty'
+gem 'geocoder'
 
 group :development, :test do
   gem 'capybara'
