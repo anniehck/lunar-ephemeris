@@ -5,6 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  geocoded_by :current_sign_in_ip
+  after_validation :geocode
+
   validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 16 }
   validates :first_name, presence: true
   validates :last_name, presence: true

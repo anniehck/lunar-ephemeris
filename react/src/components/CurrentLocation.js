@@ -39,7 +39,7 @@ class CurrentLocation extends Component {
     let location = this.state.locationData;
     return(
         <p>Your current location is {location.city}, {location.state} {location.zip}<br />
-        latitude: {lat}, longitude: {lat}
+        latitude: {location.latitude}, longitude: {location.longitude}
         </p>
     )
   }

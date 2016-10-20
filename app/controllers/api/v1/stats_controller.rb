@@ -1,10 +1,9 @@
 require 'httparty'
 class Api::V1::StatsController < ApplicationController
   def index
-    location = HTTParty.get('http://ip-api.com/json')
-    latitude = location['lat']
-    longitude = location['lon']
-
+    geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
+    latitude = geocoder_data['geometry']['location']['lat']
+    longitude = geocoder_data['geometry']['location']['lng']
 
     aeris_key = ENV["AERIS_CLIENT_ID"]
     aeris_secret = ENV["AERIS_CLIENT_SECRET"]
