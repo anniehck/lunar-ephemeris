@@ -18,6 +18,7 @@ class CurrentLocation extends Component {
   }
 
   locationError(error) {
+    console.log(error);
     this.setState({ error: error })
   }
 
@@ -30,14 +31,15 @@ class CurrentLocation extends Component {
     .done(data => {
       this.setState({ locationData: data })
     });
-
   }
 
   render() {
+    let lat = this.state.latitude;
+    let lon = this.state.longitude;
     let location = this.state.locationData;
     return(
         <p>Your current location is {location.city}, {location.state} {location.zip}<br />
-        latitude: {location.latitude}, longitude: {location.longitude}
+        latitude: {lat}, longitude: {lat}
         </p>
     )
   }
