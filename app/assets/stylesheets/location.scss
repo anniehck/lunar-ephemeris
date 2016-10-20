@@ -1,11 +1,13 @@
 .location {
   width: 75%;
   margin: 15% auto 0;
+  text-align: center;
   p {
-    text-align: center;
+    line-height: 1.8em;
   }
   form {
     padding-bottom: 20px;
+    text-align: left;
   }
 
 }

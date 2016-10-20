@@ -61,8 +61,6 @@ class Location extends Component {
     return(
       <div className="location content">
         <CurrentLocation />
-
-
         <p className="flash">{this.state.flash}</p>
 
         <LocationForm
