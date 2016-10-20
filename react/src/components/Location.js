@@ -61,12 +61,6 @@ class Location extends Component {
     return(
       <div className="location content">
         <CurrentLocation />
-        <form onSubmit={this.handleFormSubmit}>
-          <div className="submit">
-            <input type="submit" value="Use this location" />
-          </div>
-        </form>
-
         <p className="flash">{this.state.flash}</p>
 
         <LocationForm

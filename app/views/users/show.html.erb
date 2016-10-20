@@ -1,13 +1,12 @@
 <div class="user-show content">
-  <h4><%= @city %></h4>
-  <h3>Hey <%= @user.first_name %>!</h3>
+  <h2>Hey <%= @user.first_name %>!</h2>
   <p>
+    Current Location: <%= @city %><br />
     Username: <%= @user.username %><br />
     Email: <%= @user.email %>
   </p>
 
   <p>
-    <%= link_to 'Update Account', edit_user_registration_path %><br />
-    <%= link_to 'Delete Account', cancel_user_registration_path %>
+    <%= link_to 'Update Account', edit_user_registration_path %>
   </p>
 </div>
