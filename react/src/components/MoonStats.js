@@ -7,7 +7,9 @@ class MoonStats extends Component {
       city: '',
       moon: [],
       name: '',
-      illum: ''
+      illum: '',
+      lat: '',
+      lon: ''
     };
   }
 
@@ -17,7 +19,9 @@ class MoonStats extends Component {
       url: "/api/v1/stats"
     })
     .done(data => {
-      this.setState({ city: data.city, moon: data.moon, name: data.moon.phase.name, illum: data.moon.phase.illum })
+      if (data.moon.length !== 0) {
+        this.setState({ city: data.city, moon: data.moon, name: data.moon.phase.name, illum: data.moon.phase.illum })
+      }
     });
   }
 

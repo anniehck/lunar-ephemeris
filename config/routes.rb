@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :facts, only: [:index]
+      resources :facts, only: [:index, :new, :create]
       resources :locations
       resources :stats, only: [:index]
       resources :apods, only: [:index]
