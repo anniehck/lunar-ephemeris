@@ -1,23 +1,14 @@
 require 'httparty'
 class Api::V1::LocationsController < ApplicationController
   def index
-    geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
+    res = HTTParty.get('https://api.ipify.org?format=json')
+    geocoder_data = Geocoder.search(res['ip'])
 
-    latitude = geocoder_data['geometry']['location']['lat'].round(4)
-    longitude = geocoder_data['geometry']['location']['lng'].round(4)
-
-    place = geocoder_data['address_components']
-
-    city = ''
-    region = ''
-    zip = ''
-    place.each do |p|
-      p.each do |key, val|
-        city = p['long_name'] if val.include?('locality') || val.include?('administrative_area_level_2')
-        region = p['long_name'] if val.include?('administrative_area_level_1')
-        zip = p['short_name'] if val.include?('postal_code')
-      end
-    end
+    city = geocoder_data.first.data['city']
+    region = geocoder_data.first.data['region_name']
+    zip = geocoder_data.first.data['zip_code']
+    latitude = geocoder_data.first.data['latitude']
+    longitude = geocoder_data.first.data['longitude']
 
     respond_to do |format|
       format.json do
