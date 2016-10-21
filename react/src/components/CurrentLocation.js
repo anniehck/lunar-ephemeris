@@ -17,8 +17,7 @@ class CurrentLocation extends Component {
 
   updateLocation(data) {
    this.setState({ latitude: data.coords.latitude, longitude: data.coords.longitude });
-   debugger;
-  //  let locData = { latitude: data.coords.latitude, longitude: data.coords.longitude };
+     //  let locData = { latitude: data.coords.latitude, longitude: data.coords.longitude };
   //  $.ajax({
   //    type: 'POST',
   //    url: 'api/v1/locations',
@@ -54,8 +53,7 @@ class CurrentLocation extends Component {
     }).done(data => {
       let message = 'Success!';
       this.setState({ flash: message });
-      debugger;
-    });
+      });
   }
 
   render() {

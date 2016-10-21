@@ -7,9 +7,31 @@ class MoonStats extends Component {
       city: '',
       moon: [],
       name: '',
-      illum: ''
+      illum: '',
+      lat: '',
+      lon: ''
     };
+    // let options = { timeout: 25000, enableHighAccuracy: true };
+    // navigator.geolocation.watchPosition(this.updateLocation.bind(this), this.locationError.bind(this), options);
   }
+
+  // updateLocation(data) {
+  //   this.setState({ lat: data.coords.lat, lon: data.coords.lon });
+  //   let locationData = { latitude: this.state.lat, longitude: this.state.lon };
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: 'api/v1/stats',
+  //     data: { location: locationData }
+  //   }).done(data => {
+  //     debugger;
+  //     let message = 'Success!';
+  //     this.setState({ flash: message });
+  //     });
+  // }
+  //
+  // locationError(error) {
+  //   alert(error.message);
+  // }
 
   componentDidMount() {
     $.ajax({
@@ -17,7 +39,9 @@ class MoonStats extends Component {
       url: "/api/v1/stats"
     })
     .done(data => {
-      this.setState({ city: data.city, moon: data.moon, name: data.moon.phase.name, illum: data.moon.phase.illum })
+      if (data.moon.length !== 0) {
+        this.setState({ city: data.city, moon: data.moon, name: data.moon.phase.name, illum: data.moon.phase.illum })
+      }
     });
   }
 
