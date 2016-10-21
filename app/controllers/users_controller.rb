@@ -9,7 +9,6 @@ class UsersController < ApplicationController
       geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
       @city = geocoder_data['address_components'][4]['long_name']
     end
-    binding.pry
     @geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
   end
 

@@ -11,10 +11,11 @@ class Api::V1::LocationsController < ApplicationController
     zip = geocoder_data.first.data['zipcode']
     latitude = geocoder_data.first.data['latitude']
     longitude = geocoder_data.first.data['longitude']
-
+    key = ENV["GOOGLEMAPS_KEY"]
+    
     respond_to do |format|
       format.json do
-        render json: { latitude: latitude, longitude: longitude, city: city, state: region, zip: zip }
+        render json: { latitude: latitude, longitude: longitude, city: city, state: region, zip: zip, key: key  }
       end
     end
   end
