@@ -34,7 +34,6 @@ class CurrentLocation extends Component {
         url: "/api/v1/locations"
       })
       .done(data => {
-      debugger;
         this.setState({ locationData: data })
       });
 
