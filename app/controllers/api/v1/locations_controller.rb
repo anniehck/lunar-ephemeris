@@ -22,10 +22,6 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def create
-    # aeris_key = ENV["AERIS_CLIENT_ID"]
-    # aeris_secret = ENV["AERIS_CLIENT_SECRET"]
-    #
-    # response = HTTParty.get("http://api.aerisapi.com/sunmoon?p=#{latitude},#{longitude}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
     location = params['location']
 
     if !location['latitude'].empty? && location['city'].empty?

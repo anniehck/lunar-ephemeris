@@ -7,7 +7,6 @@ class Api::V1::StatsController < ApplicationController
     geocoder_data = Geocoder.search(ip)
     latitude = geocoder_data.first.data['latitude']
     longitude = geocoder_data.first.data['longitude']
-    binding.pry
     # geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
     # latitude = geocoder_data['geometry']['location']['lat']
     # longitude = geocoder_data['geometry']['location']['lng']
@@ -41,8 +40,5 @@ class Api::V1::StatsController < ApplicationController
     aeris_key = ENV["AERIS_CLIENT_ID"]
     aeris_secret = ENV["AERIS_CLIENT_SECRET"]
     response = HTTParty.get("http://api.aerisapi.com/sunmoon?p=#{latitude},#{longitude}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
-
-
   end
-
 end

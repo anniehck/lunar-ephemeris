@@ -11,27 +11,7 @@ class MoonStats extends Component {
       lat: '',
       lon: ''
     };
-    // let options = { timeout: 25000, enableHighAccuracy: true };
-    // navigator.geolocation.watchPosition(this.updateLocation.bind(this), this.locationError.bind(this), options);
   }
-
-  // updateLocation(data) {
-  //   this.setState({ lat: data.coords.lat, lon: data.coords.lon });
-  //   let locationData = { latitude: this.state.lat, longitude: this.state.lon };
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: 'api/v1/stats',
-  //     data: { location: locationData }
-  //   }).done(data => {
-  //     debugger;
-  //     let message = 'Success!';
-  //     this.setState({ flash: message });
-  //     });
-  // }
-  //
-  // locationError(error) {
-  //   alert(error.message);
-  // }
 
   componentDidMount() {
     $.ajax({
