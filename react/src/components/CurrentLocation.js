@@ -23,35 +23,32 @@ class CurrentLocation extends Component {
    this.setState({ latitude: data.coords.latitude, longitude: data.coords.longitude });
  }
 
- locationError(error) {
-  console.log(error);
-  this.setState({ error: error.message })
-}
+   locationError(error) {
+    console.log(error);
+    this.setState({ error: error.message })
+  }
 
   componentDidMount() {
-    // this.updateLocation(data);
-    if (this.state.latitude !== '') {
       $.ajax({
         method: 'GET',
         url: "/api/v1/locations"
       })
       .done(data => {
-        debugger;
-        this.setState({ locationData: data, key: data.key })
+        this.setState({ locationData: data })
       });
 
-      $.ajax({
-        method: 'GET',
-        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${this.state.key}`
-      })
-      .done(data => {
-        debugger;
-        if (data.results.length !== 0) {
-          let cityName = data.results[0].address_components[2].long_name;
-          this.setState({ city: cityName });
-        }
-      });
-    }
+      // $.ajax({
+      //   method: 'GET',
+      //   url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${this.state.key}`
+      // })
+      // .done(data => {
+      //   debugger;
+      //   if (data.results.length !== 0) {
+      //     let cityName = data.results[0].address_components[2].long_name;
+      //     this.setState({ city: cityName });
+      //   }
+      // });
+
   }
 
   handleCurrentLocation(event) {

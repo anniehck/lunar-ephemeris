@@ -6,16 +6,15 @@ class Api::V1::LocationsController < ApplicationController
     ip = request.remote_ip
     geocoder_data = Geocoder.search(ip)
 
-    city = geocoder_data.first.data['city']
-    region = geocoder_data.first.data['region_name']
-    zip = geocoder_data.first.data['zipcode']
-    latitude = geocoder_data.first.data['latitude']
-    longitude = geocoder_data.first.data['longitude']
-    key = ENV["GOOGLEMAPS_KEY"]
-    
+      city = geocoder_data.first.data['city']
+      region = geocoder_data.first.data['region_name']
+      zip = geocoder_data.first.data['zipcode']
+      latitude = geocoder_data.first.data['latitude']
+      longitude = geocoder_data.first.data['longitude']
+
     respond_to do |format|
       format.json do
-        render json: { latitude: latitude, longitude: longitude, city: city, state: region, zip: zip, key: key  }
+        render json: { latitude: latitude, longitude: longitude, city: city, state: region, zip: zip }
       end
     end
   end

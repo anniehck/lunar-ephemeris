@@ -6,8 +6,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     unless current_user.nil?
-      geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
-      @city = geocoder_data['address_components'][4]['long_name']
+      # geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
+      # @city = geocoder_data['address_components'][4]['long_name']
+      ip = request.remote_ip
+      geocoder_data = Geocoder.search(ip)
+      @city = geocoder_data.first.data['city']
     end
     @geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
   end
