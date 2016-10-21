@@ -22,19 +22,45 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def create
+    # aeris_key = ENV["AERIS_CLIENT_ID"]
+    # aeris_secret = ENV["AERIS_CLIENT_SECRET"]
+    #
+    # response = HTTParty.get("http://api.aerisapi.com/sunmoon?p=#{latitude},#{longitude}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
     location = params['location']
-    loc = "#{location['city']} #{location['state']}"
 
-    results = Geocoder.search(loc)
-    if results.empty?
-      flash[:alert] = 'No matches for location'
+    if !location['latitude'].empty? && location['city'].empty?
+      lat = location['latitude']
+      lon = location['longitude']
+      result = Geocoder.search("#{lat},#{lon}").first.data
+      city = ''
+      region = ''
+      zip = ''
+      result['address_components'].each do |r|
+
+        r.each do |key, val|
+          city = r['long_name'] if val.include?('locality')
+          if city.empty?
+            city = r['long_name'] if val.include?('administrative_area_level_2')
+          end
+          region = r['long_name'] if val.include?('administrative_area_level_1')
+          zip = r['short_name'] if val.include?('postal_code')
+        end
+      end
+      location['city'] = city
+      location['state'] = region
+      location['zip'] = zip
     else
-      latitude = results[0].data['geometry']['location']['lat']
-      longitude = results[0].data['geometry']['location']['lng']
+      loc = "#{location['city']} #{location['state']}"
+      results = Geocoder.search(loc)
+      if results.empty?
+        flash[:alert] = 'No matches for location'
+      else
+        latitude = results[0].data['geometry']['location']['lat']
+        longitude = results[0].data['geometry']['location']['lng']
+      end
+      location['latitude'] = latitude
+      location['longitude'] = longitude
     end
-
-    location['latitude'] = latitude
-    location['longitude'] = longitude
 
     @location = Location.new(location_params)
     @location.user = current_user

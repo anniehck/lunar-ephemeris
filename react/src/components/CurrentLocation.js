@@ -17,6 +17,7 @@ class CurrentLocation extends Component {
 
   updateLocation(data) {
    this.setState({ latitude: data.coords.latitude, longitude: data.coords.longitude });
+   debugger;
   //  let locData = { latitude: data.coords.latitude, longitude: data.coords.longitude };
   //  $.ajax({
   //    type: 'POST',
@@ -29,7 +30,7 @@ class CurrentLocation extends Component {
 
  locationError(error) {
   console.log(error);
-  this.setState({ error: error })
+  this.setState({ error: error.message })
 }
 
   componentDidMount() {
@@ -45,7 +46,7 @@ class CurrentLocation extends Component {
   handleCurrentLocation(event) {
     event.preventDefault();
     let location = this.state.locationData;
-    let formData = { city: location.city, state: location.state, zip: location.zip, latitude: location.latitude, longitude: location.longitude };
+    let formData = { city: '', state: '', zip: '', latitude: this.state.latitude, longitude: this.state.longitude };
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
@@ -53,6 +54,7 @@ class CurrentLocation extends Component {
     }).done(data => {
       let message = 'Success!';
       this.setState({ flash: message });
+      debugger;
     });
   }
 
