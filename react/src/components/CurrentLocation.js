@@ -4,10 +4,33 @@ class CurrentLocation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locationData: []
+      locationData: [],
+      latitude: '',
+      longitude: '',
+      location: ''
     };
+    let options = { timeout: 25000, enableHighAccuracy: true };
+    navigator.geolocation.watchPosition(this.updateLocation.bind(this), this.locationError.bind(this), options);
+
     this.handleCurrentLocation = this.handleCurrentLocation.bind(this);
   }
+
+  updateLocation(data) {
+   this.setState({ latitude: data.coords.latitude, longitude: data.coords.longitude });
+  //  let locData = { latitude: data.coords.latitude, longitude: data.coords.longitude };
+  //  $.ajax({
+  //    type: 'POST',
+  //    url: 'api/v1/locations',
+  //    data: { location: locData }
+  //  }).done(data => {
+  //    console.log('posted');
+  //  })
+ }
+
+ locationError(error) {
+  console.log(error);
+  this.setState({ error: error })
+}
 
   componentDidMount() {
     $.ajax({
@@ -34,12 +57,15 @@ class CurrentLocation extends Component {
   }
 
   render() {
+    let lat = this.state.latitude;
+    let lon = this.state.longitude;
+
     let location = this.state.locationData;
     return(
       <div className="current-loc">
         <h2>Your Current Location</h2>
         <p>{location.city}, {location.state} {location.zip}<br />
-        latitude: {location.latitude}, longitude: {location.longitude}
+        latitude: {lat}, longitude: {lon}
         </p>
         <p>{this.state.flash}</p>
         <form onSubmit={this.handleCurrentLocation}>
