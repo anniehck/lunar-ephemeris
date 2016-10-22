@@ -1,5 +1,6 @@
 <div class="user-show content">
   <div class="stats">
+    <% if @user == current_user %>
     <h2>Hey <%= @user.first_name %>!</h2>
     <p>You were last signed in at <span class="bright"><%= @last_signed_in %></span></p>
     <p>
@@ -14,9 +15,11 @@
   </div>
 
   <h2>Your Past Locations</h2>
-  <% @locations.each do |loc| %>
-    <p>
-      <%= loc.city %>, <%= loc.state %> <%= loc.zip %>
-    </p>
+
+    <% @locations.each do |loc| %>
+      <p>
+        <%= loc.city %>, <%= loc.state %> <%= loc.zip %>
+      </p>
+    <% end %>
   <% end %>
 </div>
