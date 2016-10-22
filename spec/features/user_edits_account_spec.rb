@@ -43,5 +43,15 @@ feature 'User edits account' do
 
     expect(page).to have_content 'Password confirmation doesn\'t match Password'
   end
-  scenario 'does not fill out current password correctly'
+
+  scenario 'does not fill out current password correctly' do
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'password!'
+    fill_in 'Password confirmation', with: 'password!'
+    fill_in 'Current password', with: 'password123'
+    click_button 'Update'
+
+    expect(page).to have_content '1 error prohibited this user from being saved'
+    expect(page).to have_content 'Current password is invalid'
+  end
 end
