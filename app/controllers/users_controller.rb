@@ -11,8 +11,9 @@ class UsersController < ApplicationController
       ip = request.remote_ip
       geocoder_data = Geocoder.search(ip)
       @city = geocoder_data.first.data['city']
+      @last_signed_in = current_user.last_sign_in_at.to_s.slice(0, 10)
     end
-    @geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
+    # @geocoder_data = Geocoder.search(ip)
   end
 
   def destroy
