@@ -75,6 +75,21 @@ body {
 }
 .user-show {
   margin: 15% auto;
+  font-family: 'Poppins';
+  .stats {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    margin-bottom: 40px;
+    a i {
+      margin: 15px 0;
+      color: $bright-blue2;
+    }
+  }
+}
+span.bright {
+  font-family: 'Raleway';
+  color: $bright-blue2;
+  letter-spacing: 1.2px;
 }
 
 h2.space-fact {
