@@ -127,3 +127,11 @@ h2.space-fact {
 .active {
   color: $bright-blue2;
 }
+.cancel {
+  width: 75%;
+  margin: 50px auto;
+  text-align: center;
+  input[type="submit"] {
+    width: 35%;
+  }
+}
