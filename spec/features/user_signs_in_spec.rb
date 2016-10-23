@@ -28,4 +28,39 @@ feature 'User signs in to account' do
     expect(page).to have_content 'Invalid Email or password'
   end
 
+  xscenario 'user fills out email form to reset forgotten password' do
+    visit root_path
+    click_link 'Sign In'
+    click_link 'Forgot your password?'
+
+    expect(page).to have_content 'Forgot your password?'
+    fill_in 'Email', with: user.email
+    click_button 'Send me reset password instructions'
+
+    expect(page).to have_content 'You will receive an email with instructions on how to reset your password in a few minutes'
+  end
+
+  scenario 'user leaves reset password form blank' do
+    visit root_path
+    click_link 'Sign In'
+    click_link 'Forgot your password?'
+
+    fill_in 'Email', with: ''
+    click_button 'Send me reset password instructions'
+
+    expect(page).to have_content '1 error prohibited this user from being saved'
+    expect(page).to have_content 'Email can\'t be blank'
+  end
+
+  scenario 'user does not fill out reset password form with invalid email' do
+    visit root_path
+    click_link 'Sign In'
+    click_link 'Forgot your password?'
+
+    fill_in 'Email', with: 'nonexistent_email@yahoo.com'
+    click_button 'Send me reset password instructions'
+
+    expect(page).to have_content '1 error prohibited this user from being saved'
+    expect(page).to have_content 'Email not found'
+  end
 end
