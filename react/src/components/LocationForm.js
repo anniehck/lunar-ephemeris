@@ -23,6 +23,29 @@ const LocationForm = props => {
       /></div>
 
       <div className="field">
+        <label>State</label><br />
+        <select
+          name='state'
+          value={props.state}
+          onChange={props.handleSelect}
+          className="states">
+          <option value=""></option>
+          {
+            props.states.map(state => {
+              let current = `${state}`;
+              let index = props.states.indexOf(current);
+              return (
+                <option
+                  value={current}
+                  key={index}>
+                  {current}</option>
+              );
+            })
+          }
+          </select>
+      </div>
+
+      <div className="field">
       <label>Zip code</label><br />
       <input
         type="text"
