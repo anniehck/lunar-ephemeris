@@ -56,6 +56,14 @@ form,
     border: none;
     min-width: 90%;
   }
+  .checkbox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  input[type="checkbox"] {
+    margin-left: 10px;
+  }
   .actions,
   .submit {
     width: 30%;
