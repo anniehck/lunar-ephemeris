@@ -66,10 +66,10 @@ class CurrentLocation extends Component {
   }
 
   render() {
-    let lat = this.state.latitude;
-    let lon = this.state.longitude;
-
+    let lat = parseFloat(this.state.latitude).toFixed(4);
+    let lon = parseFloat(this.state.longitude).toFixed(4);
     let location = this.state.locationData;
+
     return(
       <div className="current-loc">
         <h2>Your Current Location</h2>
