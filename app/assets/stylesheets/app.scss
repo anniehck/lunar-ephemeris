@@ -4,8 +4,8 @@ body {
   margin: 0;
   background:
     linear-gradient(
-      rgba(187, 218, 227, 0),
-      rgba(187, 218, 227, .3)
+      rgba(187, 218, 227, .23),
+      rgba(149, 174, 181, .45)
     ),
     url('http://eskipaper.com/images/nebula-wallpaper-hd-21.jpg') center no-repeat;
   background-attachment: fixed;
@@ -103,12 +103,4 @@ span.bright {
 }
 .active {
   color: $bright-blue2;
-}
-.cancel {
-  width: 75%;
-  margin: 50px auto;
-  text-align: center;
-  input[type="submit"] {
-    width: 35%;
-  }
 }
