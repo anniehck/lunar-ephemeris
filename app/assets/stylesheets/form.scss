@@ -14,9 +14,6 @@ form,
       color: $red;
     }
   }
-  i {
-    font-size: .8em;
-  }
   .material-icons {
     font-size: 1em;
     opacity: .65;
@@ -27,10 +24,11 @@ form,
     display: flex;
     flex-direction: column;
     align-items: center;
+    i,
     em {
       align-self: flex-start;
-      font-size: .8em;
     }
+    em { font-size: .8em; }
     label {
       text-transform: lowercase;
       font-variant: small-caps;
