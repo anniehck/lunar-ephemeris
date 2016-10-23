@@ -5,6 +5,7 @@ class Reviews extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      reviews: [],
       title: '',
       body: '',
       rating: '',
@@ -13,6 +14,19 @@ class Reviews extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  componentDidMount() {
+    $.ajax({
+      type: 'GET',
+      url: 'api/v1/reviews'
+    })
+    .done(data => {
+      if (data.length !== 0) {
+        debugger;
+        this.setState({ reviews: data })
+      }
+    });
   }
 
   handleFormSubmit(event) {
@@ -24,7 +38,7 @@ class Reviews extends Component {
       data: { review: formData }
     }).success(data => {
       let message = 'Success!';
-      this.setState({ flash: message, title: '', body: '', rating: null });
+      this.setState({ flash: message, title: '', body: '', rating: '' });
       console.log('posted!');
     }).error(data => {
       let message = 'Invalid fields';
@@ -49,6 +63,7 @@ class Reviews extends Component {
 
     return(
       <div className="reviews content">
+        
         <i className="material-icons">create</i>
         <h2>New Review Form</h2>
         <p className="flash">{this.state.flash}</p>
