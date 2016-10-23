@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 import states from '../constants/states';
 
 class Location extends Component {
-  debugger;
   constructor(props) {
     super(props);
     this.state = {

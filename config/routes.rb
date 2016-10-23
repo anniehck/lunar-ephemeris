@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resource :about, only: [:show]
   resource :moon, only: [:show]
   resource :apod, only: [:show]
-  resource :review, only: [:show]
+  resource :reviews, only: [:show]
 
   namespace :api do
     namespace :v1 do

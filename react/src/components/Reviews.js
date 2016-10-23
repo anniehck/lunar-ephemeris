@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import ReviewForm from './ReviewForm';
 
 class Reviews extends Component {
-  debugger;
   constructor(props) {
     super(props);
     this.state = {
-      location: '',
-      city: '',
-      state: '',
-      zip: '',
-      lon: '',
-      lat: '',
+      title: '',
+      body: '',
+      rating: '',
       flash: ''
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -20,33 +16,21 @@ class Reviews extends Component {
   }
 
   handleFormSubmit(event) {
-    let formData = { city: this.state.city, state: this.state.state, zip: this.state.zip, latitude: this.state.lat, longitude: this.state.lon };
+    event.preventDefault();
+    let formData = { title: this.state.title, body: this.state.body, rating: this.state.rating };
     $.ajax({
       type: 'POST',
-      url: 'api/v1/locations',
-      data: { location: formData }
+      url: 'api/v1/reviews',
+      data: { review: formData }
     }).success(data => {
       let message = 'Success!';
-      this.setState({ flash: message });
+      this.setState({ flash: message, title: '', body: '', rating: null });
       console.log('posted!');
     }).error(data => {
       let message = 'Invalid fields';
       this.setState({ flash: message });
       console.log(data);
     });
-
-    let newLocation = {
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip,
-      lat: this.state.lat,
-      lon: this.state.lon
-    }
-
-    this.state.city = ''
-    this.state.state = ''
-    this.state.zip = ''
-    event.preventDefault();
   }
 
   handleChange(event) {
@@ -56,30 +40,27 @@ class Reviews extends Component {
   }
 
   handleSelect(event) {
-    let chosenState = event.target.value;
-    this.setState({ state: chosenState });
+    let userRating = event.target.value;
+    this.setState({ rating: userRating });
   }
 
   render() {
     let flash = $('#flash').text();
 
     return(
-      <div className="location content">
+      <div className="review content">
         <i className="material-icons">location_on</i>
-        <CurrentLocation />
+
         <p className="flash">{this.state.flash}</p>
 
-        <LocationForm
+        <ReviewForm
           handleFormSubmit={this.handleFormSubmit}
-          city={this.state.city}
-          state={this.state.state}
-          zip={this.state.zip}
-          lat={this.state.lat}
-          lon={this.state.lon}
           handleChange={this.handleChange}
           handleSelect={this.handleSelect}
-          states={states}
-        />
+          title={this.state.title}
+          body={this.state.body}
+          rating={this.state.rating}
+          />
       </div>
     )
   }
