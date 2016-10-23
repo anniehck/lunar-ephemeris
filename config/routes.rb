@@ -4,17 +4,19 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resource :location
-  resource :about
-  resource :moon
-  resource :apod
+  resource :location, only: [:show]
+  resource :about, only: [:show]
+  resource :moon, only: [:show]
+  resource :apod, only: [:show]
+  resource :review, only: [:show]
 
   namespace :api do
     namespace :v1 do
-      resources :facts, only: [:index, :new, :create]
+      resources :facts, only: [:index]
       resources :locations
       resources :stats, only: [:index]
       resources :apods, only: [:index]
+      resources :reviews
     end
   end
 end
