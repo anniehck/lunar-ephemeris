@@ -8,9 +8,7 @@ class MoonStats extends Component {
       city: '',
       date: '',
       moonPhase: '',
-      illum: '',
-      lat: '',
-      lon: ''
+      illum: ''
     };
   }
 
