@@ -3,7 +3,7 @@ import React from 'react';
 const ReviewForm = props => {
   return (
     <form onSubmit={props.handleFormSubmit}>
-      <h2>New Review Form</h2>
+      
       <div className="field">
       <label>Title</label><br />
       <input

@@ -48,11 +48,10 @@ class Reviews extends Component {
     let flash = $('#flash').text();
 
     return(
-      <div className="review content">
-        <i className="material-icons">location_on</i>
-
+      <div className="reviews content">
+        <i className="material-icons">create</i>
+        <h2>New Review Form</h2>
         <p className="flash">{this.state.flash}</p>
-
         <ReviewForm
           handleFormSubmit={this.handleFormSubmit}
           handleChange={this.handleChange}

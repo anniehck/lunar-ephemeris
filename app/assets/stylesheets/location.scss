@@ -1,6 +1,7 @@
-.location {
+.location,
+.reviews {
   width: 75%;
-  margin: 15% auto 0;
+  margin: 10% auto 25px;
   text-align: center;
   i {
     font-size: 4.5em;
@@ -13,5 +14,4 @@
     padding-bottom: 20px;
     text-align: left;
   }
-
 }

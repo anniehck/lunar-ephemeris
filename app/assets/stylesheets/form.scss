@@ -6,6 +6,7 @@ form,
   color: #000;
   h2 {
     text-align: center;
+    margin-bottom: 30px;
   }
   #error_explanation {
     font-size: .8em;
@@ -35,7 +36,14 @@ form,
       font-variant: small-caps;
       align-self: flex-start;
     }
-    select.states {
+    textarea {
+      width: 100%;
+      font-size: .9em;
+      background: none;
+      border: 1px solid #000;
+      height: 130px;
+    }
+    select {
       width: 100%;
       align-self: flex-start;
       border: 1px solid #000;
@@ -87,6 +95,13 @@ form,
 .current-loc {
   padding-bottom: 2em;
   border-bottom: 1px solid rgba(0,0,0,.4);
+  .submit {
+    margin: 20px auto 0;
+    input[type="submit"] {
+      padding: 7px;
+      margin-left: -15px;
+    }
+  }
 }
 .cancel {
   width: 75%;
