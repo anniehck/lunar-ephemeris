@@ -3,7 +3,7 @@ import React from 'react';
 const LocationForm = props => {
   return (
     <form onSubmit={props.handleFormSubmit}>
-      <h2>Location Form</h2>
+      <h2>New Location Form</h2>
       <div className="field">
       <label>City</label><br />
       <input
@@ -14,13 +14,27 @@ const LocationForm = props => {
       /></div>
 
       <div className="field">
-      <label>State</label><br />
-      <input
-        type="text"
-        value={props.state}
-        name='state'
-        onChange={props.handleChange}
-      /></div>
+        <label>State</label><br />
+        <select
+          name='state'
+          value={props.state}
+          onChange={props.handleSelect}
+          className="states">
+          <option value=""></option>
+          {
+            props.states.map(state => {
+              let current = `${state}`;
+              let index = props.states.indexOf(current);
+              return (
+                <option
+                  value={current}
+                  key={index}>
+                  {current}</option>
+              );
+            })
+          }
+          </select>
+      </div>
 
       <div className="field">
       <label>Zip code</label><br />

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import CurrentLocation from './CurrentLocation';
 import LocationForm from './LocationForm';
 import { Link } from 'react-router';
+import states from '../constants/states';
 
 class Location extends Component {
+  debugger;
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +19,7 @@ class Location extends Component {
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleFormSubmit(event) {
@@ -55,11 +58,17 @@ class Location extends Component {
     this.setState(nextState);
   }
 
+  handleSelect(event) {
+    let chosenState = event.target.value;
+    this.setState({ state: chosenState });
+  }
+
   render() {
     let flash = $('#flash').text();
 
     return(
       <div className="location content">
+        <i className="material-icons">location_on</i>
         <CurrentLocation />
         <p className="flash">{this.state.flash}</p>
 
@@ -71,6 +80,8 @@ class Location extends Component {
           lat={this.state.lat}
           lon={this.state.lon}
           handleChange={this.handleChange}
+          handleSelect={this.handleSelect}
+          states={states}
         />
       </div>
     )

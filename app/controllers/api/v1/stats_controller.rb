@@ -1,31 +1,30 @@
 require 'httparty'
+require 'date'
 class Api::V1::StatsController < ApplicationController
   def index
-    res = HTTParty.get('https://api.ipify.org?format=json')
+    aeris_key = ENV["AERIS_CLIENT_ID"]
+    aeris_secret = ENV["AERIS_CLIENT_SECRET"]
+
     ip = request.remote_ip
-    # geocoder_data = Geocoder.search(res['ip'])
     geocoder_data = Geocoder.search(ip)
     latitude = geocoder_data.first.data['latitude']
     longitude = geocoder_data.first.data['longitude']
-    # geocoder_data = Geocoder.search(current_user.current_sign_in_ip).first.data
-    # latitude = geocoder_data['geometry']['location']['lat']
-    # longitude = geocoder_data['geometry']['location']['lng']
 
-    aeris_key = ENV["AERIS_CLIENT_ID"]
-    aeris_secret = ENV["AERIS_CLIENT_SECRET"]
-    unless latitude == '0' || longitude == '0'
-      response = HTTParty.get("http://api.aerisapi.com/sunmoon?p=#{latitude},#{longitude}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
-
-      cityName = response['response'][0]['place']['name'].capitalize
-      moonData = response['response'][0]['moon']
-    else
-      cityName = 'Somewhere'
-      moonData = []
+    if latitude == '0' || longitude == '0'
+      # Set default coords to Boston
+      latitude = 42.3601
+      longitude = -71.0589
     end
+
+    response = HTTParty.get("http://api.aerisapi.com/sunmoon?p=#{latitude},#{longitude}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
+
+    city_name = response['response'][0]['place']['name'].capitalize
+    today = response['response'][0]['dateTimeISO']
+    moon_data = response['response'][0]['moon']
 
     respond_to do |format|
       format.json do
-        render json: { city: cityName, moon: moonData }
+        render json: { city: city_name, date: today, moon: moon_data }
       end
     end
   end
