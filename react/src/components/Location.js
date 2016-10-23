@@ -68,6 +68,7 @@ class Location extends Component {
 
     return(
       <div className="location content">
+        <i className="material-icons">location_on</i>
         <CurrentLocation />
         <p className="flash">{this.state.flash}</p>
 

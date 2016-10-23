@@ -36,19 +36,6 @@ class CurrentLocation extends Component {
       .done(data => {
         this.setState({ locationData: data })
       });
-
-      // $.ajax({
-      //   method: 'GET',
-      //   url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${this.state.key}`
-      // })
-      // .done(data => {
-      //   debugger;
-      //   if (data.results.length !== 0) {
-      //     let cityName = data.results[0].address_components[2].long_name;
-      //     this.setState({ city: cityName });
-      //   }
-      // });
-
   }
 
   handleCurrentLocation(event) {
@@ -79,7 +66,7 @@ class CurrentLocation extends Component {
         <p>{this.state.flash}</p>
         <form onSubmit={this.handleCurrentLocation}>
           <div className="submit">
-            <input type="submit" value="Use this location!" />
+            <input type="submit" value="Use current location!" />
           </div>
         </form>
       </div>
