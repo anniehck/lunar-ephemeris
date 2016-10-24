@@ -104,3 +104,7 @@ span.bright {
 .active {
   color: $bright-blue2;
 }
+img.profile-pic {
+  max-width: 250px;
+  border-radius: 50%;
+}
