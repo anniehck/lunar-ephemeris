@@ -1,6 +1,7 @@
 <div class="user-show content">
   <div class="stats">
-    <% if @user == current_user %>
+    <%= image_tag(current_user.profile_photo.url, class: 'profile-pic') %>
+
     <h2>Hey <%= @user.first_name %>!</h2>
     <p>You were last signed in at <span class="bright"><%= @last_signed_in %></span></p>
     <p>
@@ -14,6 +15,7 @@
     </p>
   </div>
 
+  <div class="past-loc">
   <h2>Your Past Locations</h2>
 
     <% @locations.each do |loc| %>
@@ -21,7 +23,7 @@
         <%= loc.city %>, <%= loc.state %> <%= loc.zip %>
       </p>
     <% end %>
-  <% end %>
+  </div>
 
   <div class="link-bottom">
     <%= link_to '<i class="material-icons">keyboard_backspace</i> Back'.html_safe, :back %>

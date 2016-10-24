@@ -23,7 +23,7 @@ feature 'User edits account' do
   end
 
   scenario 'user does not fill out all required fields' do
-    fill_in 'Email', with: ''
+    fill_in 'Email', with: nil
     fill_in 'Password', with: 'password3'
     fill_in 'Password confirmation', with: 'password3'
     fill_in 'Current password', with: user.password
@@ -36,7 +36,7 @@ feature 'User edits account' do
 
   scenario 'password does not match password confirmation' do
     fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'password2'
+    fill_in 'Password', with: 'password234'
     fill_in 'Password confirmation', with: 'password'
     fill_in 'Current password', with: user.password
     click_button 'Update'

@@ -77,13 +77,28 @@ body {
   margin: 15% auto;
   font-family: 'Poppins';
   .stats {
+    text-align: center;
     font-size: 1.2em;
     line-height: 1.5em;
     margin-bottom: 40px;
+    p {
+      width: 70%;
+      margin: 0 auto;
+      text-align: left;
+    }
     a i {
-      margin: 15px 0;
+      margin: 25px 0;
       color: $bright-blue2;
     }
+    img.profile-pic {
+      max-width: 250px;
+      border-radius: 50%;
+      filter: grayscale(.3);
+    }
+  }
+  .past-loc {
+    width: 70%;
+    margin: 60px auto;
   }
 }
 span.bright {

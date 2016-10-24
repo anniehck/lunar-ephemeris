@@ -8,6 +8,9 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'httparty'
 gem 'geocoder'
+gem 'carrierwave'
+gem 'fog'
+gem 'fog-aws'
 
 group :development, :test do
   gem 'capybara'
