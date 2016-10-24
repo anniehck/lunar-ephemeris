@@ -17,6 +17,7 @@ const ReviewForm = props => {
       <textarea
         value={props.body}
         name='body'
+        placeholder='10 characters minimum!'
         onChange={props.handleChange}
       /></div>
 

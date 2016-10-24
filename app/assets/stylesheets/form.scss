@@ -38,9 +38,11 @@ form,
     }
     textarea {
       width: 100%;
+      max-width: 100%;
       font-size: .9em;
       background: none;
       border: 1px solid #000;
+      padding: 5px;
       height: 130px;
     }
     select {
@@ -70,6 +72,7 @@ form,
     width: 100%;
     background: none;
     font-size: 1em;
+    padding: 3px;
   }
   input[type="submit"] {
     background-color: rgba(255, 255, 255, .5);
