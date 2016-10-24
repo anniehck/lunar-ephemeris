@@ -2,7 +2,10 @@
   <div class="stats">
     <% if current_user.profile_photo? %>
       <%= image_tag(current_user.profile_photo.url, class: 'profile-pic') %>
+    <% else %>
+      <%= image_tag('http://41.media.tumblr.com/6287c6a43834e3051207aa6edd6cee42/tumblr_ne8wwdi35z1s07f3eo3_1280.jpg', class: 'profile-pic') %>
     <% end %>
+
     <h2>Hey <%= @user.first_name %>!</h2>
     <p>You were last signed in at <span class="bright"><%= @last_signed_in %></span></p>
     <p>

@@ -52,6 +52,12 @@ form,
       font-size: 1em;
     }
   }
+  .photo {
+    align-items: flex-start;
+    label {
+      margin-bottom: 10px;
+    }
+  }
   .input {
     width: 100%;
     display: flex;
