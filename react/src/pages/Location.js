@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CurrentLocation from './CurrentLocation';
-import LocationForm from './LocationForm';
+import CurrentLocation from '../components/CurrentLocation';
+import LocationForm from '../components/LocationForm';
 import { Link } from 'react-router';
 import states from '../constants/states';
 

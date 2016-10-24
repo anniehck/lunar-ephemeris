@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReviewForm from './ReviewForm';
-import ReviewList from './ReviewList';
+import ReviewForm from '../components/ReviewForm';
+import ReviewList from '../components/ReviewList';
 
 class Reviews extends Component {
   constructor(props) {
