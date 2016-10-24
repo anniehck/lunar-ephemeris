@@ -19,6 +19,7 @@
     </p>
   </div>
 
+  <div class="past-loc">
   <h2>Your Past Locations</h2>
 
     <% @locations.each do |loc| %>
@@ -26,7 +27,7 @@
         <%= loc.city %>, <%= loc.state %> <%= loc.zip %>
       </p>
     <% end %>
-
+  </div>
 
   <div class="link-bottom">
     <%= link_to '<i class="material-icons">keyboard_backspace</i> Back'.html_safe, :back %>
