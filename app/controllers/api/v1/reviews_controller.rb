@@ -16,15 +16,16 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def create
-    review = params['review']
-
     @review = Review.new(review_params)
     @review.user = current_user
 
-    binding.pry
-
     if @review.save
       flash[:notice] = 'Success!'
+      respond_to do |format|
+        format.json do
+          render json: { user: @review.user.username }
+        end
+      end
     else
       @review.errors.any?
       flash[:alert] = @review.errors.full_messages.join("\n")
