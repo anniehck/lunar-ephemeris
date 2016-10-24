@@ -125,10 +125,18 @@ form,
   text-align: center;
   a { font-size: .9em; }
 }
-// #flash {
-//   text-align: center;
-//   padding: 0;
-// }
+#flash-notice,
+#flash-alert {
+  text-align: center;
+  font-size: .9em;
+  font-weight: bold;
+}
+#flash-notice {
+  color: $bright-blue;
+}
+#flash-alert {
+  color: $red;
+}
 .flash {
   text-align: center;
   padding: 15px 0 0 15px;

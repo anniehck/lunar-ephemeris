@@ -12,10 +12,9 @@ class Reviews extends Component {
       rating: '',
       user: '',
       flash: '',
+      flashClass: '',
       class: 'hidden',
       clicked: false,
-      content: '',
-      header: '',
       icon: <i className="material-icons">add_circle</i>
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -23,11 +22,19 @@ class Reviews extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
+    this.resetFlash = this.resetFlash.bind(this);
   }
 
   componentDidMount() {
     this.refreshPage();
     setInterval(this.refreshPage, 5000);
+    setInterval(this.resetFlash, 15000);
+  }
+
+  resetFlash() {
+    if (this.state.flash !== '') {
+      this.setState({ flash: '' });
+    }
   }
 
   refreshPage() {
@@ -44,19 +51,43 @@ class Reviews extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    let formData = { title: this.state.title, body: this.state.body, rating: this.state.rating };
+    let formData = {
+      title: this.state.title,
+      body: this.state.body,
+      rating: this.state.rating };
+
     $.ajax({
       type: 'POST',
       url: 'api/v1/reviews',
       data: { review: formData }
     }).success(data => {
-      let message = 'Success!';
-      let submitted = <div className="content"><p>Your review has been submitted!</p></div>;
-      this.setState({ user: data.user, flash: message, content: submitted });
+      let message;
+      let flashType;
+      if (data.errorMessages === undefined ) {
+        message = `Thanks ${data.user}, your review has been submitted!`;
+        flashType = 'flash-notice';
+      } else {
+        message = data.errorMessages;
+        flashType = 'flash-alert';
+      }
+      this.setState({
+        user: data.user,
+        flash: message,
+        flashClass: flashType
+      });
       console.log('posted!');
     }).error(data => {
-      let message = 'Invalid fields';
-      this.setState({ flash: message });
+      let message;
+      let authorization = 'You need to sign in or sign up before continuing.';
+      if (data.responseText === authorization) {
+        message = authorization;
+      } else {
+        message = `${data.status}: ${data.statusText}`;
+      }
+      this.setState({
+        flash: message,
+        flashClass: 'flash-alert'
+      });
       console.log(data);
     });
 
@@ -85,15 +116,21 @@ class Reviews extends Component {
 
   handleClick(event) {
     if (this.state.clicked) {
-      this.setState({ class: 'hidden', clicked: false, icon: <i className="material-icons">add_circle</i> });
+      this.setState({
+        class: 'hidden',
+        clicked: false,
+        icon: <i className="material-icons">add_circle</i>
+      });
     } else {
-      this.setState({ class: 'show', clicked: true, icon: <i className="material-icons">remove_circle</i> });
+      this.setState({
+        class: 'show',
+        clicked: true,
+        icon: <i className="material-icons">remove_circle</i>
+      });
     }
   }
 
   render() {
-    let flash = $('#flash').text();
-
     return(
       <div className="reviews content">
         <div id="top"></div>
@@ -117,7 +154,7 @@ class Reviews extends Component {
           <div id="new">
             <i className="material-icons">create</i>
             <h2>New Review Form</h2>
-            <p className="flash">{this.state.flash}</p>
+            <p id={this.state.flashClass}>{this.state.flash}</p>
             <ReviewForm
                 handleFormSubmit={this.handleFormSubmit}
                 handleChange={this.handleChange}
