@@ -1,5 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @reviews = Review.all.order(created_at: :desc)
@@ -20,15 +20,19 @@ class Api::V1::ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      flash[:notice] = 'Success!'
+      # flash[:notice] = 'Success!'
       respond_to do |format|
-        format.json do
-          render json: { user: @review.user.username }
-        end
+        format.json { render json: { user: @review.user.username } }
       end
     else
-      @review.errors.any?
-      flash[:alert] = @review.errors.full_messages.join("\n")
+      if @review.errors.any?
+        @review_errors = @review.errors.full_messages.join(' - ')
+        respond_to do |format|
+          format.json do
+            render json: { user: @review.user.username, errorMessages: @review_errors }
+          end
+        end
+      end
     end
   end
 
