@@ -1,6 +1,7 @@
-.location {
+.location,
+.reviews {
   width: 75%;
-  margin: 15% auto 0;
+  margin: 10% auto 25px;
   text-align: center;
   i {
     font-size: 4.5em;
@@ -13,5 +14,54 @@
     padding-bottom: 20px;
     text-align: left;
   }
+}
+.hidden {
+  display: none;
+}
+.reviews {
+  #new,
+  .show {
+    padding-top: 25px;
+  }
+  .review {
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    text-align: left;
+    h4 {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    p {
+      font-family: 'Poppins';
+    }
+  }
+  h2 {
+    font-size: 2em;
+  }
+  .review-list {
+    margin-top: 35px;
+  }
+  .review-links {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 30px;
+    a {
+      font-weight: bold;
+      margin: 0 15px;
+      font-size: .9em;
+    }
+  }
+}
 
+.icon-link {
+  display: flex;
+  flex-direction: column;
+  i {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+}
+.top {
+  width: 30%;
+  margin: 25px auto;
 }
