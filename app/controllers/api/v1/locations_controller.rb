@@ -1,16 +1,14 @@
 require 'httparty'
 class Api::V1::LocationsController < ApplicationController
   def index
-    # res = HTTParty.get('https://api.ipify.org?format=json')
-    # geocoder_data = Geocoder.search(res['ip'])
     ip = request.remote_ip
     geocoder_data = Geocoder.search(ip)
 
-      city = geocoder_data.first.data['city']
-      region = geocoder_data.first.data['region_name']
-      zip = geocoder_data.first.data['zipcode']
-      latitude = geocoder_data.first.data['latitude']
-      longitude = geocoder_data.first.data['longitude']
+    city = geocoder_data.first.data['city']
+    region = geocoder_data.first.data['region_name']
+    zip = geocoder_data.first.data['zipcode']
+    latitude = geocoder_data.first.data['latitude']
+    longitude = geocoder_data.first.data['longitude']
 
     respond_to do |format|
       format.json do
@@ -34,7 +32,6 @@ class Api::V1::LocationsController < ApplicationController
       region = ''
       zip = ''
       result['address_components'].each do |r|
-
         r.each do |key, val|
           city = r['long_name'] if val.include?('locality')
           if city.empty?
@@ -48,10 +45,15 @@ class Api::V1::LocationsController < ApplicationController
       location['state'] = region
       location['zip'] = zip
     else
-      loc = "#{location['city']} #{location['state']}"
-      results = Geocoder.search(loc)
+      results = Geocoder.search(location['zip'])
       if results.empty?
-        flash[:alert] = 'No matches for location'
+        error_message = 'No matches for location'
+        respond_to do |format|
+          format.json do
+            render json: { error: error_message }
+          end
+        end
+        return
       else
         latitude = results[0].data['geometry']['location']['lat']
         longitude = results[0].data['geometry']['location']['lng']
@@ -59,15 +61,22 @@ class Api::V1::LocationsController < ApplicationController
       location['latitude'] = latitude
       location['longitude'] = longitude
     end
-
     @location = Location.new(location_params)
     @location.user = current_user
 
     if @location.save
-      flash[:notice] = 'Success!'
+      respond_to do |format|
+        format.json { render json: { user: @location.user.username } }
+      end
     else
-      @location.errors.any?
-      flash[:alert] = @location.errors.full_messages.join("\n")
+      if @location.errors.any?
+        @location_errors = @location.errors.full_messages.join(' - ')
+        respond_to do |format|
+          format.json do
+            render json: { user: @location.user.username, errorMessages: @location_errors }
+          end
+        end
+      end
     end
   end
 

@@ -3,7 +3,7 @@ import React from 'react';
 const LocationForm = props => {
   return (
     <form onSubmit={props.handleFormSubmit}>
-      <h2>New Location Form</h2>
+      
       <div className="field">
       <label>City</label><br />
       <input
