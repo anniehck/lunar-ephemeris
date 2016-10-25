@@ -14,7 +14,8 @@ class Location extends Component {
       zip: '',
       lon: '',
       lat: '',
-      flash: ''
+      flash: '',
+      flashClass: ''
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -22,33 +23,49 @@ class Location extends Component {
   }
 
   handleFormSubmit(event) {
-    let formData = { city: this.state.city, state: this.state.state, zip: this.state.zip, latitude: this.state.lat, longitude: this.state.lon };
+    event.preventDefault();
+    let formData = {
+      city: this.state.city,
+      state: this.state.state,
+      zip: this.state.zip,
+      latitude: this.state.lat,
+      longitude: this.state.lon };
+
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
-      let message = 'Success!';
-      this.setState({ flash: message });
-      console.log('posted!');
+      let message;
+      let flashType;
+      if (data.errorMessages === undefined ) {
+        message = data.error;
+        flashType = 'flash-notice';
+        this.state.city = ''
+        this.state.state = ''
+        this.state.zip = ''
+      } else {
+        message = data.errorMessages;
+        flashType = 'flash-alert';
+      }
+      this.setState({
+        flash: message,
+        flashClass: flashType
+      });
     }).error(data => {
-      let message = 'Invalid fields';
-      this.setState({ flash: message });
-      console.log(data);
+      debugger;
+      let message;
+      let authorization = 'You need to sign in or sign up before continuing.';
+      if (data.responseText === authorization) {
+        message = authorization;
+      } else {
+        message = `${data.status}: ${data.statusText}`;
+      }
+      this.setState({
+        flash: message,
+        flashClass: 'flash-alert'
+      });
     });
-
-    let newLocation = {
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip,
-      lat: this.state.lat,
-      lon: this.state.lon
-    }
-
-    this.state.city = ''
-    this.state.state = ''
-    this.state.zip = ''
-    event.preventDefault();
   }
 
   handleChange(event) {
@@ -63,13 +80,13 @@ class Location extends Component {
   }
 
   render() {
-    let flash = $('#flash').text();
-
     return(
       <div className="location content">
         <i className="material-icons">location_on</i>
         <CurrentLocation />
-        <p className="flash">{this.state.flash}</p>
+
+        <h2>New Location Form</h2>
+        <p id={this.state.flashClass}>{this.state.flash}</p>
 
         <LocationForm
           handleFormSubmit={this.handleFormSubmit}

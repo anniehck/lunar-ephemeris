@@ -20,7 +20,6 @@ class Api::V1::ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      # flash[:notice] = 'Success!'
       respond_to do |format|
         format.json { render json: { user: @review.user.username } }
       end
