@@ -19,7 +19,7 @@ class Gallery extends Component {
       url: "/api/v1/galleries"
     })
     .done(data => {
-      this.setState({ photos: data.gallery.objects })
+      this.setState({ photos: data.gallery })
     });
   }
 
@@ -31,7 +31,7 @@ class Gallery extends Component {
       data: { search: this.state.query }
     })
     .done(data => {
-      let galleryPhotos = data.gallery.objects;
+      let galleryPhotos = data.gallery;
       debugger;
       if (galleryPhotos.length !== 0) {
         this.setState({ photos: galleryPhotos })
@@ -49,7 +49,7 @@ class Gallery extends Component {
 
   render() {
     return(
-      <div className="content">
+      <div className="gallery">
         <div className="search">
           <form onSubmit={this.handleSearch}>
             <input type="text" onChange={this.handleChange} />

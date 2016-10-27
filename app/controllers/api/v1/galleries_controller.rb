@@ -6,7 +6,7 @@ class Api::V1::GalleriesController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render json: { gallery: response }
+        render json: { gallery: response['objects'].shuffle }
       end
     end
   end

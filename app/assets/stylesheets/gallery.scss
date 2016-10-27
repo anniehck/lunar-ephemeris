@@ -15,22 +15,31 @@
       border: none;
     }
   }
-
 }
-.photo-list {
-  max-width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 25px 0;
-  .photo img {
-    width: 270px;
-    height: 270px;
-    object-fit: cover;
-    overflow: hidden;
+.gallery {
+  width: 100%;
+  margin: 25px auto;
+  .photo-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px 0;
+    .photo {
+      margin: 0;
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        overflow: hidden;
+        filter: grayscale(.6);
+        &:hover {
+          filter: grayscale(0);
+        }
+      }
+    }
+    .hide {
+      display: none;
+    }
   }
-  .hide {
-    display: none;
-  }
-
 }
