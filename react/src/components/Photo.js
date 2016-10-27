@@ -73,12 +73,11 @@ class Photo extends Component {
           style={modalStyle}
           backdropStyle={backdropStyle}
           >
-          <div style={dialogueStyle} className="dialogue">
+          <div style={dialogueStyle}>
             <i className="material-icons" onClick={this.closeModal} style={iconStyle}>close</i>
             <img src={this.props.url} style={imageStyle} />
             <p style={pStyle}>{this.props.title}</p>
           </div>
-
         </Modal>
 
       </div>
