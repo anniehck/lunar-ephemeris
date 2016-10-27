@@ -31,7 +31,8 @@ class MoonStats extends Component {
     let setTime = '?';
     if (moonStats.riseISO !== null) {
       riseTime = new Date(moonStats.riseISO).toString().substr(16).slice(0, 5);
-    } else if (moonStats.setISO !== null) {
+    }
+    if (moonStats.setISO !== null) {
       setTime = new Date(moonStats.setISO).toString().substr(16).slice(0, 5);
     }
 
