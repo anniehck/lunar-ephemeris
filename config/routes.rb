@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resource :location, only: [:show]
   resource :about, only: [:show]
   resource :moon, only: [:show]
+  resource :gallery, only: [:show]
   resource :apod, only: [:show]
   resource :reviews, only: [:show]
 
