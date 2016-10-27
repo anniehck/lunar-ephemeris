@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :galleries
       resources :apods, only: [:index]
       resources :reviews
+      resources :datas, only: [:index, :new, :create]
     end
   end
 end

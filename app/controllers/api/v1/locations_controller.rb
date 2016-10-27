@@ -22,6 +22,9 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def create
+    aeris_key = ENV["AERIS_CLIENT_ID"]
+    aeris_secret = ENV["AERIS_CLIENT_SECRET"]
+
     location = params['location']
 
     if !location['latitude'].empty? && location['city'].empty?
@@ -65,8 +68,10 @@ class Api::V1::LocationsController < ApplicationController
     @location.user = current_user
 
     if @location.save
+      moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{latitude},#{longitude}?to=+4weeks&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
+
       respond_to do |format|
-        format.json { render json: { user: @location.user.username } }
+        format.json { render json: { user: @location.user.username, data: moonData['response'] } }
       end
     else
       if @location.errors.any?

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import CurrentLocation from '../components/CurrentLocation';
 import LocationForm from '../components/LocationForm';
+import MoonData from '../components/MoonData';
+import DataFeed from '../components/DataFeed';
 import { Link } from 'react-router';
 import states from '../constants/states';
 
@@ -15,7 +17,8 @@ class Location extends Component {
       lon: '',
       lat: '',
       flash: '',
-      flashClass: ''
+      flashClass: '',
+      moonData: []
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,11 +39,14 @@ class Location extends Component {
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
+      debugger;
       let message;
       let flashType;
+      let moonStats;
       if (data.errorMessages === undefined ) {
         message = data.error;
         flashType = 'flash-notice';
+        moonStats = data.data;
         this.state.city = ''
         this.state.state = ''
         this.state.zip = ''
@@ -50,10 +56,10 @@ class Location extends Component {
       }
       this.setState({
         flash: message,
-        flashClass: flashType
+        flashClass: flashType,
+        moonData: moonStats
       });
     }).error(data => {
-      debugger;
       let message;
       let authorization = 'You need to sign in or sign up before continuing.';
       if (data.responseText === authorization) {
@@ -99,6 +105,8 @@ class Location extends Component {
           handleSelect={this.handleSelect}
           states={states}
         />
+
+        <DataFeed data={this.state.moonData}/>
       </div>
     )
   }
