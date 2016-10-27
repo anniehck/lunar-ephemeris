@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PhotoList from '../components/PhotoList';
 
+
 class Gallery extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,6 @@ class Gallery extends Component {
     })
     .done(data => {
       let galleryPhotos = data.gallery;
-      debugger;
       if (galleryPhotos.length !== 0) {
         this.setState({ photos: galleryPhotos })
       } else {
@@ -50,6 +50,7 @@ class Gallery extends Component {
   render() {
     return(
       <div className="gallery">
+
         <div className="search">
           <form onSubmit={this.handleSearch}>
             <input type="text" onChange={this.handleChange} />

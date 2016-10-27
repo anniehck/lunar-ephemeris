@@ -1,6 +1,7 @@
 import React from 'react';
 import Photo from './Photo';
 
+
 const PhotoList = props => {
   let photos = props.photos.map(photo => {
     const { id, title, description, url_hd } = photo;
@@ -16,7 +17,7 @@ const PhotoList = props => {
   });
 
   return (
-    <div className="photo-list">
+    <div className="photo-list modal-open">
       {photos}
     </div>
   )
