@@ -1,0 +1,47 @@
+.search {
+  width: 70%;
+  margin: 10% auto;
+  form {
+    display: flex;
+    justify-content: center;
+    input[type="text"] {
+      width: 60%;
+      margin-right: 10px;
+    }
+    button {
+      width: 20%;
+      padding: 5px;
+      background-color: rgba(255, 255, 255, .5);
+      border: none;
+    }
+  }
+}
+.gallery {
+  width: 100%;
+  margin: 25px auto;
+  .photo-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 25px 0;
+    position: relative;
+    .photo {
+      margin: 5px;
+      img.thumbnail {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        overflow: hidden;
+        filter: grayscale(.6);
+        transition: all .7s linear;
+        &:hover {
+          filter: grayscale(0);
+        }
+      }
+    }
+    .hide {
+      display: none;
+    }
+  }
+}
