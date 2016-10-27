@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :facts, only: [:index]
       resources :locations
       resources :stats, only: [:index]
+      resources :galleries
       resources :apods, only: [:index]
       resources :reviews
     end

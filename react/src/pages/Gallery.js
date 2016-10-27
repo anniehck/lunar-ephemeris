@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import PhotoList from '../components/PhotoList';
 
-class Home extends Component {
+class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      randFact: ''
+      photos: []
     };
   }
 
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: "/api/v1/facts"
+      url: "/api/v1/galleries"
     })
     .done(data => {
-      this.setState({ randFact: data.fact.name })
+      this.setState({ photos: data.gallery.objects })
     });
+  }
+
+  handleSearch() {
+    
   }
 
   render() {
     return(
-      <div>
-        <h2 className="space-fact">"  "</h2>
+      <div className="content">
+        <PhotoList photos={this.state.photos} />
       </div>
     )
   }
 }
 
-export default Home;
+export default Gallery;
