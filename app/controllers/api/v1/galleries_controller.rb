@@ -10,4 +10,19 @@ class Api::V1::GalleriesController < ApplicationController
       end
     end
   end
+
+  def create
+    key = ENV["ASTROBIN_KEY"]
+    secret = ENV["ASTROBIN_SECRET"]
+    search = params['search']
+
+    response = HTTParty.get("http://astrobin.com/api/v1/image/?title__icontains=#{search}&api_key=#{key}&api_secret=#{secret}&format=json")
+
+    respond_to do |format|
+      format.json do
+        render json: { gallery: response }
+      end
+    end
+
+  end
 end
