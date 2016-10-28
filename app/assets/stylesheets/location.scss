@@ -18,6 +18,7 @@
 .hidden {
   display: none;
 }
+
 .reviews {
   #new,
   .show {
@@ -52,16 +53,50 @@
     }
   }
 }
-
+.icon-menu {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 30px;
+  a {
+    font-weight: bold;
+    margin: 0 15px;
+    font-size: .9em;
+  }
+}
 .icon-link {
   display: flex;
   flex-direction: column;
   i {
-    font-size: 1.5em;
+    font-size: 1.7em;
     margin-bottom: 5px;
   }
 }
 .top {
   width: 30%;
   margin: 25px auto;
+}
+.moondata {
+  margin: 30px auto;
+}
+.data-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  .data {
+    width: 25%;
+    height: 280px;
+    font-size: .9em;
+    font-family: 'Poppins';
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(186,218,248, .25);
+    p.moonphase {
+      text-align: center;
+    }
+    p {
+      text-align: left;
+    }
+  }
 }

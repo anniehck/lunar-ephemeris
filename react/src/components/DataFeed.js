@@ -23,8 +23,6 @@ const DataFeed = props => {
     );
   });
 
-  ;
-
   return (
     <div className="data-list">
       {data}

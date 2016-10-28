@@ -3,7 +3,7 @@ import React from 'react';
 const LocationForm = props => {
   return (
     <form onSubmit={props.handleFormSubmit}>
-      
+
       <div className="field">
       <label>City</label><br />
       <input
@@ -44,6 +44,27 @@ const LocationForm = props => {
         name='zip'
         onChange={props.handleChange}
       /></div>
+
+
+      <div className="radio-field">
+      <label>See data for the next:</label><br />
+        <div className="buttons">
+          <div className="radio">
+          <label>Day</label>
+          <input type="radio" name="range" value="day" onChange={props.handleChange} />
+          </div>
+
+          <div className="radio">
+          <label>Week</label>
+          <input type="radio" name="range" value="week" onChange={props.handleChange} />
+          </div>
+
+          <div className="radio">
+          <label>Month</label>
+          <input type="radio" name="range" value="month" onChange={props.handleChange} />
+          </div>
+        </div>
+      </div>
 
       <div className="submit">
       <input type="submit" value="Check Location" />

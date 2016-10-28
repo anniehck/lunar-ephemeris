@@ -6,7 +6,7 @@ import DataFeed from '../components/DataFeed';
 import { Link } from 'react-router';
 import states from '../constants/states';
 
-class Location extends Component {
+class NewLocation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,26 +19,12 @@ class Location extends Component {
       range: '',
       flash: '',
       flashClass: '',
-      moonData: [],
-      formClass: 'hidden',
-      dataClass: 'hidden',
-      clicked: false,
-      dataClicked: false,
-      form: '',
-      content: ''
+      moonData: []
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleData = this.handleData.bind(this);
   }
-
-  // componentDidMount() {
-  //   let newForm = ;
-  //   this.setState({ content: newForm })
-  // }
 
   handleFormSubmit(event) {
     event.preventDefault();
@@ -48,15 +34,13 @@ class Location extends Component {
       zip: this.state.zip,
       latitude: this.state.lat,
       longitude: this.state.lon,
-      range: this.state.range
-    };
+      range: this.state.range };
 
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
-      debugger;
       let message;
       let flashType;
       let moonStats;
@@ -91,8 +75,6 @@ class Location extends Component {
     });
   }
 
-
-
   handleChange(event) {
     let nextState = {};
     nextState[event.target.name] = event.target.value;
@@ -104,69 +86,11 @@ class Location extends Component {
     this.setState({ state: chosenState });
   }
 
-  handleClick(event) {
-    if (this.state.clicked) {
-      this.setState({
-        formClass: 'hidden',
-        clicked: false
-      });
-    } else {
-      this.setState({
-        formClass: 'show',
-        clicked: true
-      });
-    }
-  }
-
-  handleData(event) {
-    if (this.state.dataClicked) {
-      this.setState({
-        dataClass: 'hidden',
-        dataClicked: false
-      });
-    } else {
-      this.setState({
-        dataClass: 'show',
-        dataClicked: true
-      });
-    }
-  }
-
   render() {
     return(
       <div className="location content">
-      <div id="top"></div>
-        <div className="icon-menu">
-          <div className="icon-link">
-            <i className="material-icons">edit_location</i>
-            <a href="#new">New</a>
-          </div>
-          <div className="icon-link">
-            <i className="material-icons">brightness_3</i>
-            <a onClick={this.handleData}>Moon Data</a>
-          </div>
-          <div className="icon-link">
-            <i className="material-icons">person_pin_circle</i>
-            <a name="current" onClick={this.handleClick}>Current</a>
-          </div>
-
-        </div>
-
-        <div className={this.state.dataClass}>
-          <div className="moondata">
-            <h2>Moon Data</h2>
-            <DataFeed data={this.state.moonData}/>
-          </div>
-        </div>
-
-
         <i className="material-icons">location_on</i>
-
-        <div className={this.state.formClass}>
-          <CurrentLocation range={this.state.range} />
-        </div>
-
-        <a id="new"></a>
+        
         <h2>New Location Form</h2>
         <p id={this.state.flashClass}>{this.state.flash}</p>
 
@@ -182,9 +106,12 @@ class Location extends Component {
           handleSelect={this.handleSelect}
           states={states}
         />
+
+        <h2>Moon Data</h2>
+        <DataFeed data={this.state.moonData}/>
       </div>
     )
   }
 }
 
-export default Location;
+export default NewLocation;

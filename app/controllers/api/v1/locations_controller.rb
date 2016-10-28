@@ -28,9 +28,9 @@ class Api::V1::LocationsController < ApplicationController
     location = params['location']
 
     if !location['latitude'].empty? && location['city'].empty?
-      lat = location['latitude']
-      lon = location['longitude']
-      result = Geocoder.search("#{lat},#{lon}").first.data
+      latitude = location['latitude']
+      longitude = location['longitude']
+      result = Geocoder.search("#{latitude},#{longitude}").first.data
       city = ''
       region = ''
       zip = ''
@@ -67,8 +67,13 @@ class Api::V1::LocationsController < ApplicationController
     @location = Location.new(location_params)
     @location.user = current_user
 
+    range = location['range']
+    range_query = '?to=+1day' if range == 'day'
+    range_query = "?to=+1week" if range == 'week'
+    range_query = "?to=+4weeks" if range == 'month'
+
     if @location.save
-      moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{latitude},#{longitude}?to=+4weeks&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
+      moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{latitude},#{longitude}#{range_query}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
 
       respond_to do |format|
         format.json { render json: { user: @location.user.username, data: moonData['response'] } }
