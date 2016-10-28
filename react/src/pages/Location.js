@@ -32,11 +32,6 @@ class Location extends Component {
     this.handleData = this.handleData.bind(this);
   }
 
-  // componentDidMount() {
-  //   let newForm = ;
-  //   this.setState({ content: newForm })
-  // }
-
   handleFormSubmit(event) {
     event.preventDefault();
     let formData = {
@@ -56,7 +51,7 @@ class Location extends Component {
       let message;
       let flashType;
       let moonStats;
-      if (data.errorMessages === undefined ) {
+      if (data.errorMessages === undefined) {
         message = 'Sucess! Go check your moon stats';
         flashType = 'flash-notice';
         moonStats = data.data;
