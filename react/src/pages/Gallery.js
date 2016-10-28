@@ -60,6 +60,8 @@ class Gallery extends Component {
         </div>
 
         <PhotoList photos={this.state.photos} />
+
+        <p>image source | Astrobin</p>
       </div>
     )
   }
