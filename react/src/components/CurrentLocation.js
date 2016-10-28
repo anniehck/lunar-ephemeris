@@ -106,7 +106,7 @@ class CurrentLocation extends Component {
         <p id="flash-notice">{this.state.flash}</p>
 
           <div className="submit">
-            <input type="submit" value="Use current location!" />
+            <button type="submit">Use current location!</button>
           </div>
         </form>
 

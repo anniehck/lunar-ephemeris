@@ -1,3 +1,8 @@
+@mixin button-hover {
+  background-color: rgba(201, 213, 236, .5);
+  letter-spacing: 1.15px;
+}
+
 form,
 #new_user,
 #edit_user {
@@ -126,6 +131,22 @@ form,
       margin-left: -15px;
     }
   }
+  .radio-field {
+    label {
+      align-self: center;
+    }
+  }
+  button[type="submit"] {
+    border: none;
+    font-size: .8em;
+    width: 100%;
+    padding: 5px;
+    background: rgba(255, 255, 255, .6);
+    transition: all 1s linear;
+    &:hover {
+      background-color: rgba(201, 213, 236, .5);
+    }
+  }
 }
 .cancel {
   width: 75%;
@@ -148,6 +169,7 @@ form,
 }
 #flash-notice {
   color: $bright-blue;
+  font-size: 1.12em;
 }
 #flash-alert {
   color: $red;

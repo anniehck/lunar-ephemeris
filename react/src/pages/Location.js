@@ -23,7 +23,8 @@ class Location extends Component {
       dataClass: 'hidden',
       clicked: false,
       dataClicked: false,
-      icon: 'edit_location'
+      icon: 'edit_location',
+      iconClass: 'material-icons grey'
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -65,7 +66,8 @@ class Location extends Component {
       this.setState({
         flash: message,
         flashClass: flashType,
-        moonData: moonStats
+        moonData: moonStats,
+        iconClass: 'material-icons bright'
       });
     }).error(data => {
       let message;
@@ -137,7 +139,7 @@ class Location extends Component {
             <a href="#new">New</a>
           </div>
           <div className="icon-link">
-            <i className="material-icons">brightness_3</i>
+            <i className={this.state.iconClass}>brightness_3</i>
             <a onClick={this.handleData}>Moon Stats</a>
           </div>
           <div className="icon-link">
@@ -150,7 +152,7 @@ class Location extends Component {
         <div className={this.state.dataClass}>
           <div className="moondata">
             <i className="material-icons">brightness_3</i>
-            <h2>Moon Stats</h2>
+            <h1>Moon Stats</h1>
             <DataFeed data={this.state.moonData}/>
 
             <div className="icon-link top">

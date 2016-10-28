@@ -23,17 +23,19 @@ const DataFeed = props => {
       );
     });
 
-    let content;
+    let header;
     if (data.length !== 0) {
-      content = data;
+      header = `@${props.data[0].place.name}`;
     } else {
-      content = 'Submit a Location to see moon data!';
+      header = 'Submit a Location to see moon data!';
     }
 
   return (
-    <div className="data-list">
-      {content}
-
+    <div>
+    <h3>{header}</h3>
+      <div className="data-list">
+        {data}
+      </div>
     </div>
   )
 }
