@@ -147,13 +147,13 @@ class Reviews extends Component {
 
           <div className={this.state.class}>
             <i className="material-icons">chat</i>
-            <h2>Reviews</h2>
+            <h2 className="header">Reviews</h2>
             <ReviewList reviews={this.state.reviews} />
           </div>
 
           <div id="new">
             <i className="material-icons">create</i>
-            <h2>New Review Form</h2>
+            <h2 className="header">New Review Form</h2>
             <p id={this.state.flashClass}>{this.state.flash}</p>
             <ReviewForm
                 handleFormSubmit={this.handleFormSubmit}

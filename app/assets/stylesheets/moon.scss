@@ -44,13 +44,18 @@ h2.space-fact {
     font-size: 1.2em;
     text-transform: lowercase;
     font-variant: small-caps;
-    span.blue {
-      color: $bright-blue;
-    }
   }
   p.phase {
+    width: 50%;
+    margin: 0 auto;
     font-size: 1.5em;
     color: $bright-blue;
     letter-spacing: 1.1px;
+    background-color: rgba(0, 0, 0, .3);
   }
+}
+span.blue {
+  color: $bright-blue;
+  opacity: .65;
+  animation: glow 2s infinite alternate;
 }

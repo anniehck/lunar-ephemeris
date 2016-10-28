@@ -39,7 +39,7 @@ class MoonStats extends Component {
     return(
       <div className="moon-stats content">
         <i className="material-icons">brightness_2</i>
-        <h3>The Moon in {this.state.city} Tonight</h3>
+        <h2 className="header">The Moon in {this.state.city} Tonight</h2>
         <p>{date}</p>
         <p>The moon rises at {riseTime} and sets at {setTime}</p>
         <p className="phase">{this.state.moonPhase}</p>
