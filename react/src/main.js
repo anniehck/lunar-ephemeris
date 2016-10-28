@@ -5,7 +5,6 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './pages/App';
 import Home from './pages/Home';
 import Location from './pages/Location';
-import About from './pages/About';
 import MoonStats from './pages/MoonStats';
 import Gallery from './pages/Gallery';
 import Apod from './pages/Apod';
@@ -17,7 +16,6 @@ $(function() {
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="/location" component={Location} />
-        <Route path="/about" component={About} />
         <Route path="/moon" component={MoonStats} />
         <Route path="/gallery" component={Gallery} />
         <Route path="/apod" component={Apod} />

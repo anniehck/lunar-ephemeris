@@ -9,8 +9,7 @@ export default React.createClass({
         <ul role="nav" className="navbar">
           <li><NavLink to="/" activeClassName="active" onlyActiveOnIndex={true}>Home</NavLink></li>
           <li><NavLink to="/location">Location</NavLink></li>
-          <li><NavLink to="/about">About</NavLink></li>
-          <li><NavLink to="/moon">Moon Data</NavLink></li>
+          <li><NavLink to="/moon">Today</NavLink></li>
           <li><NavLink to="/gallery">Gallery</NavLink></li>
           <li><NavLink to="/apod">APOD</NavLink></li>
           <li><NavLink to="/reviews">Reviews</NavLink></li>

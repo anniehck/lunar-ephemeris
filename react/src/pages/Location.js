@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CurrentLocation from '../components/CurrentLocation';
 import LocationForm from '../components/LocationForm';
-import MoonData from '../components/MoonData';
 import DataFeed from '../components/DataFeed';
 import { Link } from 'react-router';
 import states from '../constants/states';
