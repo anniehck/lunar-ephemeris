@@ -31,6 +31,25 @@ class Location extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleData = this.handleData.bind(this);
+    this.resetFlash = this.resetFlash.bind(this);
+    this.resetIcon = this.resetIcon.bind(this);
+  }
+
+  componentDidMount() {
+    setInterval(this.resetFlash, 10000);
+    setInterval(this.resetIcon, 10000);
+  }
+
+  resetFlash() {
+    if (this.state.flash !== '') {
+      this.setState({ flash: '' });
+    }
+  }
+
+  resetIcon() {
+    if (this.state.iconClass !== 'material-icons grey') {
+      this.setState({ iconClass: 'material-icons grey'});
+    }
   }
 
   handleFormSubmit(event) {
@@ -83,8 +102,6 @@ class Location extends Component {
       });
     });
   }
-
-
 
   handleChange(event) {
     let nextState = {};
@@ -150,9 +167,9 @@ class Location extends Component {
         </div>
 
         <div className={this.state.dataClass}>
-          <div className="moondata">
+          <div className="moon-data">
             <i className="material-icons">brightness_3</i>
-            <h1>Moon Stats</h1>
+            <h2 className="header">Moon Stats</h2>
             <DataFeed data={this.state.moonData}/>
 
             <div className="icon-link top">
@@ -170,21 +187,23 @@ class Location extends Component {
         </div>
 
         <a id="new"></a>
-        <h2>New Location Form</h2>
-        <p id={this.state.flashClass}>{this.state.flash}</p>
+        <div className="new-loc">
+          <h2 className="header">New Location Form</h2>
+          <p id={this.state.flashClass}>{this.state.flash}</p>
 
-        <LocationForm
-          handleFormSubmit={this.handleFormSubmit}
-          city={this.state.city}
-          state={this.state.state}
-          zip={this.state.zip}
-          lat={this.state.lat}
-          lon={this.state.lon}
-          range={this.state.range}
-          handleChange={this.handleChange}
-          handleSelect={this.handleSelect}
-          states={states}
-        />
+          <LocationForm
+            handleFormSubmit={this.handleFormSubmit}
+            city={this.state.city}
+            state={this.state.state}
+            zip={this.state.zip}
+            lat={this.state.lat}
+            lon={this.state.lon}
+            range={this.state.range}
+            handleChange={this.handleChange}
+            handleSelect={this.handleSelect}
+            states={states}
+          />
+        </div>
 
         <div className="icon-link top">
           <i className="material-icons">arrow_upward</i>

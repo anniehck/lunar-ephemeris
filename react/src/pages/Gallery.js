@@ -50,10 +50,10 @@ class Gallery extends Component {
   render() {
     return(
       <div className="gallery">
-
+      <h2 className="header"><span className="blue">Astro</span>Gallery</h2>
         <div className="search">
           <form onSubmit={this.handleSearch}>
-            <input type="text" onChange={this.handleChange} />
+            <input type="text" onChange={this.handleChange} placeholder='ie. Lunar Eclipse' />
             <button type="submit">Search</button>
           </form>
             <p>{this.state.error}</p>

@@ -74,10 +74,11 @@
 }
 .top {
   width: 30%;
-  margin: 25px auto;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
-.moondata {
+.moon-data {
   margin: 30px auto;
   text-align: center;
 }
@@ -111,6 +112,9 @@
       text-align: left;
     }
   }
+}
+.new-loc {
+  min-height: 80vh;
 }
 .bright {
   color: $bright-blue;

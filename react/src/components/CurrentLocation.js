@@ -78,7 +78,7 @@ class CurrentLocation extends Component {
 
     return(
       <div className="current-loc">
-        <h2>Your Current Location</h2>
+        <h2 className="header">Your Current Location</h2>
         <p>{location.city}, {location.state} {location.zip}<br />
         latitude: {lat}, longitude: {lon}
         </p>
@@ -112,7 +112,7 @@ class CurrentLocation extends Component {
 
         <div className={this.state.class}>
           <i className="material-icons">brightness_3</i>
-          <h2>Moon Stats</h2>
+          <h2 className="header">Moon Stats</h2>
           <DataFeed data={this.state.moonData}/>
           <div className="icon-link top">
             <i className="material-icons">arrow_upward</i>

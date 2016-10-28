@@ -1,6 +1,6 @@
 .search {
   width: 70%;
-  margin: 10% auto;
+  margin: 7% auto;
   form {
     display: flex;
     justify-content: center;
@@ -16,9 +16,19 @@
     }
   }
 }
+.header {
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  text-align: center;
+}
+
 .gallery {
   width: 100%;
   margin: 25px auto;
+  .header {
+    padding-top: 20px;
+  }
   .photo-list {
     width: 100%;
     display: flex;
