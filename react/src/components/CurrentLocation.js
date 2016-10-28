@@ -50,21 +50,20 @@ class CurrentLocation extends Component {
 
   handleCurrentLocation(event) {
     event.preventDefault();
-
     let formData = {
       city: '',
       state: '',
       zip: '',
       latitude: this.state.latitude,
       longitude: this.state.longitude,
-      range: this.state.range };
-      debugger;
+      range: this.state.range
+    };
+
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
       data: { location: formData }
     }).done(data => {
-      debugger;
       let message = 'Success!';
       this.setState({ flash: message, moonData: data.data, class: 'show' });
       });
@@ -86,23 +85,25 @@ class CurrentLocation extends Component {
         <form onSubmit={this.handleCurrentLocation}>
         <div className="radio-field">
         <label>See data for the next:</label><br />
-          <div className="radio">
-          <label>Day</label>
-          <input type="radio" name="range" value="day" onChange={this.handleChange} />
-          </div>
+          <div className="buttons">
+            <div className="radio">
+            <label>Day</label>
+            <input type="radio" name="range" value="day" onChange={this.handleChange} />
+            </div>
 
-          <div className="radio">
-          <label>Week</label>
-          <input type="radio" name="range" value="week" onChange={this.handleChange} />
-          </div>
+            <div className="radio">
+            <label>Week</label>
+            <input type="radio" name="range" value="week" onChange={this.handleChange} />
+            </div>
 
-          <div className="radio">
-          <label>Month</label>
-          <input type="radio" name="range" value="month" onChange={this.handleChange} />
+            <div className="radio">
+            <label>Month</label>
+            <input type="radio" name="range" value="month" onChange={this.handleChange} />
+            </div>
           </div>
         </div>
 
-        <p>{this.state.flash}</p>
+        <p id="flash-notice">{this.state.flash}</p>
 
           <div className="submit">
             <input type="submit" value="Use current location!" />
@@ -110,8 +111,13 @@ class CurrentLocation extends Component {
         </form>
 
         <div className={this.state.class}>
-          <h2>Moon Data</h2>
+          <i className="material-icons">brightness_3</i>
+          <h2>Moon Stats</h2>
           <DataFeed data={this.state.moonData}/>
+          <div className="icon-link top">
+            <i className="material-icons">arrow_upward</i>
+            <a href="#top">Back to Top</a>
+          </div>
         </div>
       </div>
     )

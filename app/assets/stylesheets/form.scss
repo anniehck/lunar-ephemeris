@@ -64,7 +64,6 @@ form,
       .radio {
         margin: 0 10px;
         input[type="radio"] {
-          // background: rgba(255, 255, 255, .3);
           opacity: .6;
           margin: 0 5px;
         }
@@ -100,7 +99,6 @@ form,
     &:hover {
       background-color: rgba(201, 213, 236, .5);
       letter-spacing: 1.15px;
-
     }
   }
   .checkbox {

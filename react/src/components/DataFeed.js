@@ -23,9 +23,16 @@ const DataFeed = props => {
     );
   });
 
+  let content;
+  if (data.length !== 0) {
+    content = data;
+  } else {
+    content = 'Submit a Location to see moon data!';
+  }
   return (
     <div className="data-list">
-      {data}
+      {content}
+      
     </div>
   )
 }

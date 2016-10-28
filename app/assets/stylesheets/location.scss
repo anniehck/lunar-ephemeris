@@ -4,7 +4,7 @@
   margin: 10% auto 25px;
   text-align: center;
   i {
-    font-size: 4.5em;
+    font-size: 5em;
     opacity: .5;
   }
   p {
@@ -84,14 +84,16 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  min-height: 90vh;
+  text-align: center;
   .data {
     width: 25%;
-    height: 280px;
+    min-height: 280px;
     font-size: .9em;
     font-family: 'Poppins';
     margin: 10px;
     padding: 10px;
-    background-color: rgba(186,218,248, .25);
+    background-color: rgba(186, 218, 248, .15);
     p.moonphase {
       text-align: center;
     }
@@ -99,4 +101,8 @@
       text-align: left;
     }
   }
+}
+.current-loc {
+  text-align: center;
+  min-height: 90vh;
 }

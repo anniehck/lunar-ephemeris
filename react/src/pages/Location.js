@@ -24,11 +24,9 @@ class Location extends Component {
       dataClass: 'hidden',
       clicked: false,
       dataClicked: false,
-      form: '',
-      content: ''
+      icon: 'edit_location'
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -56,12 +54,11 @@ class Location extends Component {
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
-      debugger;
       let message;
       let flashType;
       let moonStats;
       if (data.errorMessages === undefined ) {
-        message = data.error;
+        message = 'Sucess! Go check your moon stats';
         flashType = 'flash-notice';
         moonStats = data.data;
         this.state.city = ''
@@ -108,12 +105,14 @@ class Location extends Component {
     if (this.state.clicked) {
       this.setState({
         formClass: 'hidden',
-        clicked: false
+        clicked: false,
+        icon: 'edit_location'
       });
     } else {
       this.setState({
         formClass: 'show',
-        clicked: true
+        clicked: true,
+        icon: 'person_pin_circle'
       });
     }
   }
@@ -122,12 +121,14 @@ class Location extends Component {
     if (this.state.dataClicked) {
       this.setState({
         dataClass: 'hidden',
-        dataClicked: false
+        dataClicked: false,
+        icon: 'edit_location'
       });
     } else {
       this.setState({
         dataClass: 'show',
-        dataClicked: true
+        dataClicked: true,
+        icon: 'brightness_3'
       });
     }
   }
@@ -143,7 +144,7 @@ class Location extends Component {
           </div>
           <div className="icon-link">
             <i className="material-icons">brightness_3</i>
-            <a onClick={this.handleData}>Moon Data</a>
+            <a onClick={this.handleData}>Moon Stats</a>
           </div>
           <div className="icon-link">
             <i className="material-icons">person_pin_circle</i>
@@ -154,13 +155,19 @@ class Location extends Component {
 
         <div className={this.state.dataClass}>
           <div className="moondata">
-            <h2>Moon Data</h2>
+            <i className="material-icons">brightness_3</i>
+            <h2>Moon Stats</h2>
             <DataFeed data={this.state.moonData}/>
+
+            <div className="icon-link top">
+              <i className="material-icons">arrow_upward</i>
+              <a href="#top">Back to Top</a>
+            </div>
           </div>
         </div>
 
 
-        <i className="material-icons">location_on</i>
+        <i className="material-icons">{this.state.icon}</i>
 
         <div className={this.state.formClass}>
           <CurrentLocation range={this.state.range} />
@@ -182,6 +189,11 @@ class Location extends Component {
           handleSelect={this.handleSelect}
           states={states}
         />
+
+        <div className="icon-link top">
+          <i className="material-icons">arrow_upward</i>
+          <a href="#top">Back to Top</a>
+        </div>
       </div>
     )
   }

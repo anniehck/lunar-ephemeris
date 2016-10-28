@@ -67,7 +67,7 @@ const LocationForm = props => {
       </div>
 
       <div className="submit">
-      <input type="submit" value="Check Location" />
+      <input type="submit" value="Get Moon Stats" />
       </div>
       </form>
   );
