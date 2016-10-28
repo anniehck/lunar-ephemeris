@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :users
 
   resource :location, only: [:show]
-  resource :about, only: [:show]
   resource :moon, only: [:show]
   resource :gallery, only: [:show]
   resource :apod, only: [:show]
@@ -19,7 +18,6 @@ Rails.application.routes.draw do
       resources :galleries
       resources :apods, only: [:index]
       resources :reviews
-      resources :datas, only: [:index, :new, :create]
     end
   end
 end
