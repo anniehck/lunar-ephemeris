@@ -1,4 +1,3 @@
-# require 'httparty'
 class Api::V1::ApodsController < ApplicationController
   def index
     nasa_key = ENV["NASA_API_KEY"]

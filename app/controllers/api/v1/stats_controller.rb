@@ -1,4 +1,3 @@
-require 'httparty'
 require 'date'
 class Api::V1::StatsController < ApplicationController
   def index

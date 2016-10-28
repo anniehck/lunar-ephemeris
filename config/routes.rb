@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :users
-
   resource :location, only: [:show]
   resource :moon, only: [:show]
   resource :gallery, only: [:show]
