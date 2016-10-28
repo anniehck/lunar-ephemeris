@@ -26,6 +26,5 @@ class Api::V1::GalleriesController < ApplicationController
         render json: { gallery: response['objects'].shuffle }
       end
     end
-
   end
 end

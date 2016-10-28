@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CurrentLocation from '../components/CurrentLocation';
 import LocationForm from '../components/LocationForm';
+import DataFeed from '../components/DataFeed';
 import { Link } from 'react-router';
 import states from '../constants/states';
 
@@ -14,13 +15,27 @@ class Location extends Component {
       zip: '',
       lon: '',
       lat: '',
+      range: '',
       flash: '',
-      flashClass: ''
+      flashClass: '',
+      moonData: [],
+      formClass: 'hidden',
+      dataClass: 'hidden',
+      clicked: false,
+      dataClicked: false,
+      icon: 'edit_location'
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleData = this.handleData.bind(this);
   }
+
+  // componentDidMount() {
+  //   let newForm = ;
+  //   this.setState({ content: newForm })
+  // }
 
   handleFormSubmit(event) {
     event.preventDefault();
@@ -29,7 +44,9 @@ class Location extends Component {
       state: this.state.state,
       zip: this.state.zip,
       latitude: this.state.lat,
-      longitude: this.state.lon };
+      longitude: this.state.lon,
+      range: this.state.range
+    };
 
     $.ajax({
       type: 'POST',
@@ -38,9 +55,11 @@ class Location extends Component {
     }).success(data => {
       let message;
       let flashType;
+      let moonStats;
       if (data.errorMessages === undefined ) {
-        message = data.error;
+        message = 'Sucess! Go check your moon stats';
         flashType = 'flash-notice';
+        moonStats = data.data;
         this.state.city = ''
         this.state.state = ''
         this.state.zip = ''
@@ -50,10 +69,10 @@ class Location extends Component {
       }
       this.setState({
         flash: message,
-        flashClass: flashType
+        flashClass: flashType,
+        moonData: moonStats
       });
     }).error(data => {
-      debugger;
       let message;
       let authorization = 'You need to sign in or sign up before continuing.';
       if (data.responseText === authorization) {
@@ -68,6 +87,8 @@ class Location extends Component {
     });
   }
 
+
+
   handleChange(event) {
     let nextState = {};
     nextState[event.target.name] = event.target.value;
@@ -79,12 +100,79 @@ class Location extends Component {
     this.setState({ state: chosenState });
   }
 
+  handleClick(event) {
+    if (this.state.clicked) {
+      this.setState({
+        formClass: 'hidden',
+        clicked: false,
+        icon: 'edit_location'
+      });
+    } else {
+      this.setState({
+        formClass: 'show',
+        clicked: true,
+        icon: 'person_pin_circle'
+      });
+    }
+  }
+
+  handleData(event) {
+    if (this.state.dataClicked) {
+      this.setState({
+        dataClass: 'hidden',
+        dataClicked: false,
+        icon: 'edit_location'
+      });
+    } else {
+      this.setState({
+        dataClass: 'show',
+        dataClicked: true,
+        icon: 'brightness_3'
+      });
+    }
+  }
+
   render() {
     return(
       <div className="location content">
-        <i className="material-icons">location_on</i>
-        <CurrentLocation />
+      <div id="top"></div>
+        <div className="icon-menu">
+          <div className="icon-link">
+            <i className="material-icons">edit_location</i>
+            <a href="#new">New</a>
+          </div>
+          <div className="icon-link">
+            <i className="material-icons">brightness_3</i>
+            <a onClick={this.handleData}>Moon Stats</a>
+          </div>
+          <div className="icon-link">
+            <i className="material-icons">person_pin_circle</i>
+            <a name="current" onClick={this.handleClick}>Current</a>
+          </div>
 
+        </div>
+
+        <div className={this.state.dataClass}>
+          <div className="moondata">
+            <i className="material-icons">brightness_3</i>
+            <h2>Moon Stats</h2>
+            <DataFeed data={this.state.moonData}/>
+
+            <div className="icon-link top">
+              <i className="material-icons">arrow_upward</i>
+              <a href="#top">Back to Top</a>
+            </div>
+          </div>
+        </div>
+
+
+        <i className="material-icons">{this.state.icon}</i>
+
+        <div className={this.state.formClass}>
+          <CurrentLocation range={this.state.range} />
+        </div>
+
+        <a id="new"></a>
         <h2>New Location Form</h2>
         <p id={this.state.flashClass}>{this.state.flash}</p>
 
@@ -95,10 +183,16 @@ class Location extends Component {
           zip={this.state.zip}
           lat={this.state.lat}
           lon={this.state.lon}
+          range={this.state.range}
           handleChange={this.handleChange}
           handleSelect={this.handleSelect}
           states={states}
         />
+
+        <div className="icon-link top">
+          <i className="material-icons">arrow_upward</i>
+          <a href="#top">Back to Top</a>
+        </div>
       </div>
     )
   }

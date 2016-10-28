@@ -19,7 +19,8 @@ form,
     font-size: 1.2em;
     opacity: .65;
   }
-  .field {
+  .field,
+  .radio-field {
     width: 90%;
     margin: 15px auto;
     display: flex;
@@ -54,6 +55,21 @@ form,
       font-size: 1em;
     }
   }
+
+  .radio-field {
+    margin-top: 30px;
+    padding-bottom: 20px;
+    .buttons {
+      display: flex;
+      .radio {
+        margin: 0 10px;
+        input[type="radio"] {
+          opacity: .6;
+          margin: 0 5px;
+        }
+      }
+    }
+  }
   .photo {
     align-items: flex-start;
     label {
@@ -83,7 +99,6 @@ form,
     &:hover {
       background-color: rgba(201, 213, 236, .5);
       letter-spacing: 1.15px;
-
     }
   }
   .checkbox {
