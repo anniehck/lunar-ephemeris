@@ -36,8 +36,8 @@ class Location extends Component {
   }
 
   componentDidMount() {
-    setInterval(this.resetFlash, 10000);
-    setInterval(this.resetIcon, 10000);
+    setInterval(this.resetFlash, 15000);
+    setInterval(this.resetIcon, 15000);
   }
 
   resetFlash() {
@@ -62,7 +62,6 @@ class Location extends Component {
       longitude: this.state.lon,
       range: this.state.range
     };
-
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',

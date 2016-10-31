@@ -21,47 +21,19 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def create
-    aeris_key = ENV["AERIS_CLIENT_ID"]
-    aeris_secret = ENV["AERIS_CLIENT_SECRET"]
-
     location = params['location']
 
     if !location['latitude'].empty? && location['city'].empty?
-      latitude = location['latitude']
-      longitude = location['longitude']
-      result = Geocoder.search("#{latitude},#{longitude}").first.data
-      city = ''
-      region = ''
-      zip = ''
-      result['address_components'].each do |r|
-        r.each do |key, val|
-          city = r['long_name'] if val.include?('locality')
-          if city.empty?
-            city = r['long_name'] if val.include?('administrative_area_level_2')
-          end
-          region = r['long_name'] if val.include?('administrative_area_level_1')
-          zip = r['short_name'] if val.include?('postal_code')
-        end
-      end
-      location['city'] = city
-      location['state'] = region
-      location['zip'] = zip
+      latitude = location['latitude'].to_f
+      longitude = location['longitude'].to_f
+      result = current_location(latitude, longitude)
+      location['city'] = result[0]
+      location['state'] = result[1]
+      location['zip'] = result[2]
     else
-      results = Geocoder.search(location['zip'])
-      if results.empty?
-        error_message = 'No matches for location'
-        respond_to do |format|
-          format.json do
-            render json: { error: error_message }
-          end
-        end
-        return
-      else
-        latitude = results[0].data['geometry']['location']['lat']
-        longitude = results[0].data['geometry']['location']['lng']
-      end
-      location['latitude'] = latitude
-      location['longitude'] = longitude
+      coords = find_coords(location['zip'])
+      location['latitude'] = coords.first
+      location['longitude'] = coords.last
     end
     @location = Location.new(location_params)
     @location.user = current_user
@@ -72,7 +44,7 @@ class Api::V1::LocationsController < ApplicationController
     range_query = "?to=+4weeks" if range == 'month'
 
     if @location.save
-      moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{latitude},#{longitude}#{range_query}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
+      moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{location['latitude']},#{location['longitude']}#{range_query}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
 
       respond_to do |format|
         format.json { render json: { user: @location.user.username, data: moonData['response'] } }
@@ -93,4 +65,54 @@ class Api::V1::LocationsController < ApplicationController
   def location_params
     params.require(:location).permit(:city, :state, :zip, :latitude, :longitude)
   end
+
+  def aeris_key
+    ENV["AERIS_CLIENT_ID"]
+  end
+
+  def aeris_secret
+    ENV["AERIS_CLIENT_SECRET"]
+  end
+
+  def current_location(lat, lon)
+    result = Geocoder.search("#{lat},#{lon}").first.data
+    location = []
+    city = ''
+    region = ''
+    zip = ''
+    result['address_components'].each do |r|
+      r.each do |key, val|
+        city = r['long_name'] if val.include?('locality')
+        if city.empty?
+          city = r['long_name'] if val.include?('administrative_area_level_2')
+        end
+        region = r['long_name'] if val.include?('administrative_area_level_1')
+        zip = r['short_name'] if val.include?('postal_code')
+      end
+    end
+    location << city
+    location << region
+    location << zip
+  end
+
+  def find_coords(zip)
+    coords = []
+    results = Geocoder.search(zip)
+    if results.empty?
+      error_message = 'No matches for location'
+      respond_to do |format|
+        format.json do
+          render json: { error: error_message }
+        end
+      end
+      return
+    else
+      latitude = results[0].data['geometry']['location']['lat']
+      longitude = results[0].data['geometry']['location']['lng']
+      coords << latitude
+      coords << longitude
+    end
+    coords
+  end
+
 end
