@@ -27,7 +27,7 @@ visit `localhost:3000` on your browser
 
 `rake` to run the test suite
 
-**Note:** *You will need your own API key for some pages* (Check .env.example)
+**Note:** *You will need your own API key for some pages* (check .env.example)
 
 
 ## Technologies
