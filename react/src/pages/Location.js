@@ -67,6 +67,7 @@ class Location extends Component {
       url: 'api/v1/locations',
       data: { location: formData }
     }).success(data => {
+      debugger;
       let message;
       let flashType;
       let moonStats;
@@ -80,6 +81,8 @@ class Location extends Component {
       } else {
         message = data.errorMessages;
         flashType = 'flash-alert';
+        this.setState({ flash: message, flashClass: 'flash-alert' })
+        return
       }
       this.setState({
         flash: message,

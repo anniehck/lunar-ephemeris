@@ -22,6 +22,12 @@ class Api::V1::LocationsController < ApplicationController
 
   def create
     location = params['location']
+    if !current_user
+      user_error
+      return
+    end
+
+    range = location['range']
 
     if !location['latitude'].empty? && location['city'].empty?
       latitude = location['latitude'].to_f
@@ -30,18 +36,27 @@ class Api::V1::LocationsController < ApplicationController
       location['city'] = result[0]
       location['state'] = result[1]
       location['zip'] = result[2]
+      message = validate_form(location['zip'], location['city'], location['state'], range)
+      if !message.empty?
+        form_error(message)
+        return
+      end
+      range_query = range_option(range)
     else
-      coords = find_coords(location['zip'])
-      location['latitude'] = coords.first
-      location['longitude'] = coords.last
+      message = validate_form(location['zip'], location['city'], location['state'], range)
+      if !message.empty?
+        form_error(message)
+        return
+      else
+        coords = find_coords(location['zip'])
+        location['latitude'] = coords.first
+        location['longitude'] = coords.last
+        range_query = range_option(range)
+      end
     end
+
     @location = Location.new(location_params)
     @location.user = current_user
-
-    range = location['range']
-    range_query = '?to=+1day' if range == 'day'
-    range_query = "?to=+1week" if range == 'week'
-    range_query = "?to=+4weeks" if range == 'month'
 
     if @location.save
       moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{location['latitude']},#{location['longitude']}#{range_query}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
@@ -72,6 +87,12 @@ class Api::V1::LocationsController < ApplicationController
 
   def aeris_secret
     ENV["AERIS_CLIENT_SECRET"]
+  end
+
+  def user_error
+    respond_to do |format|
+      format.json { render json: { errorMessages: 'You need to sign in or sign up before continuing.' } }
+    end
   end
 
   def current_location(lat, lon)
@@ -115,4 +136,32 @@ class Api::V1::LocationsController < ApplicationController
     coords
   end
 
+  def range_option(range)
+    range_query = '?to=+1day' if range == 'day'
+    range_query = "?to=+1week" if range == 'week'
+    range_query = "?to=+4weeks" if range == 'month'
+    range_query
+  end
+
+  def validate_form(zip, city, state, range)
+    message = ''
+    message += 'Please select a time range - ' if range.empty?
+    message += 'Zip cannot be blank - ' if zip.empty?
+    message += 'Zip must be 5 digits - ' if zip.length != 5
+    message += 'City cannot be blank - ' if city.empty?
+    message += 'State cannot be blank - ' if state.empty?
+    message
+  end
+
+  def form_error(message)
+    respond_to do |format|
+      format.json { render json: { errorMessages: message } }
+    end
+  end
+
+  def range_error
+    respond_to do |format|
+      format.json { render json: { errorMessages: 'Please select a time range.' } }
+    end
+  end
 end
