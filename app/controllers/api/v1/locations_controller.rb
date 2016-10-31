@@ -22,12 +22,11 @@ class Api::V1::LocationsController < ApplicationController
 
   def create
     location = params['location']
+    range = location['range']
     if !current_user
       user_error
       return
     end
-
-    range = location['range']
 
     if !location['latitude'].empty? && location['city'].empty?
       latitude = location['latitude'].to_f
@@ -57,21 +56,11 @@ class Api::V1::LocationsController < ApplicationController
 
     @location = Location.new(location_params)
     @location.user = current_user
-
     if @location.save
       moonData = HTTParty.get("http://api.aerisapi.com/sunmoon/#{location['latitude']},#{location['longitude']}#{range_query}&client_id=#{aeris_key}&client_secret=#{aeris_secret}")
 
       respond_to do |format|
         format.json { render json: { user: @location.user.username, data: moonData['response'] } }
-      end
-    else
-      if @location.errors.any?
-        @location_errors = @location.errors.full_messages.join(' - ')
-        respond_to do |format|
-          format.json do
-            render json: { user: @location.user.username, errorMessages: @location_errors }
-          end
-        end
       end
     end
   end
@@ -156,12 +145,6 @@ class Api::V1::LocationsController < ApplicationController
   def form_error(message)
     respond_to do |format|
       format.json { render json: { errorMessages: message } }
-    end
-  end
-
-  def range_error
-    respond_to do |format|
-      format.json { render json: { errorMessages: 'Please select a time range.' } }
     end
   end
 end
