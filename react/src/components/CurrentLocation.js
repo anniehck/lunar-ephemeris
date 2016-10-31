@@ -15,7 +15,9 @@ class CurrentLocation extends Component {
       state: '',
       zip: '',
       range: '',
-      class: 'hidden'
+      class: 'hidden',
+      flash: '',
+      flashClass: ''
     };
     let options = { timeout: 25000, enableHighAccuracy: true };
     navigator.geolocation.watchPosition(this.updateLocation.bind(this), this.locationError.bind(this), options);
@@ -58,18 +60,45 @@ class CurrentLocation extends Component {
       longitude: this.state.longitude,
       range: this.state.range
     };
-
     $.ajax({
       type: 'POST',
       url: 'api/v1/locations',
       data: { location: formData }
-    }).done(data => {
-      let message = 'Success!';
-      this.setState({ flash: message, moonData: data.data, class: 'show' });
+    })
+    .success(data => {
+      let message;
+      let flashType;
+      let moonStats;
+      if (data.errorMessages === undefined) {
+        message = 'Sucess!';
+        flashType = 'flash-notice';
+        moonStats = data.data;
+      } else {
+        message = data.errorMessages;
+        this.setState({ flash: message, flashClass: 'flash-alert' })
+        return
+      }
+      this.setState({
+        flash: message,
+        flashClass: flashType,
+        moonData: moonStats,
+        class: 'show'
       });
+    })
+    .error(data => {
+      let message;
+      let authorization = 'You need to sign in or sign up before continuing.';
+      if (data.responseText === authorization) {
+        message = authorization;
+      } else {
+        message = `${data.status}: ${data.statusText}`;
+      }
+      this.setState({
+        flash: message,
+        flashClass: 'flash-alert'
+      });
+    });
   }
-
-
 
   render() {
     let lat = parseFloat(this.state.latitude).toFixed(4);
@@ -103,7 +132,7 @@ class CurrentLocation extends Component {
           </div>
         </div>
 
-        <p id="flash-notice">{this.state.flash}</p>
+        <p id={this.state.flashClass}>{this.state.flash}</p>
 
           <div className="submit">
             <button type="submit">Use current location!</button>
