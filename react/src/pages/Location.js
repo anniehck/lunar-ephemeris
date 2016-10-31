@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import CurrentLocation from '../components/CurrentLocation';
 import LocationForm from '../components/LocationForm';
-import DataFeed from '../components/DataFeed';
 import { Link } from 'react-router';
 import states from '../constants/states';
+import DataContainer from '../components/DataContainer';
 
 class Location extends Component {
   constructor(props) {
@@ -13,8 +13,6 @@ class Location extends Component {
       city: '',
       state: '',
       zip: '',
-      lon: '',
-      lat: '',
       range: '',
       flash: '',
       flashClass: '',
@@ -58,8 +56,8 @@ class Location extends Component {
       city: this.state.city,
       state: this.state.state,
       zip: this.state.zip,
-      latitude: this.state.lat,
-      longitude: this.state.lon,
+      latitude: '',
+      longitude: '',
       range: this.state.range
     };
     $.ajax({
@@ -160,7 +158,7 @@ class Location extends Component {
           </div>
           <div className="icon-link">
             <i className={this.state.iconClass}>brightness_3</i>
-            <a onClick={this.handleData}>Moon Stats</a>
+            <a name="stats" onClick={this.handleData}>Moon Stats</a>
           </div>
           <div className="icon-link">
             <i className="material-icons">person_pin_circle</i>
@@ -169,19 +167,9 @@ class Location extends Component {
 
         </div>
 
-        <div className={this.state.dataClass}>
-          <div className="moon-data">
-            <i className="material-icons">brightness_3</i>
-            <h2 className="header">Moon Stats</h2>
-            <DataFeed data={this.state.moonData}/>
-
-            <div className="icon-link top">
-              <i className="material-icons">arrow_upward</i>
-              <a href="#top">Back to Top</a>
-            </div>
-          </div>
-        </div>
-
+        <DataContainer
+          class={this.state.dataClass}
+          data={this.state.moonData} />
 
         <i className="material-icons">{this.state.icon}</i>
 
@@ -199,8 +187,6 @@ class Location extends Component {
             city={this.state.city}
             state={this.state.state}
             zip={this.state.zip}
-            lat={this.state.lat}
-            lon={this.state.lon}
             range={this.state.range}
             handleChange={this.handleChange}
             handleSelect={this.handleSelect}

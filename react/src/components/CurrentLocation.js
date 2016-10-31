@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import DataFeed from './DataFeed';
 import CurrentLocationForm from './CurrentLocationForm';
+import DataContainer from './DataContainer';
 
 class CurrentLocation extends Component {
   constructor(props) {
@@ -114,15 +114,9 @@ class CurrentLocation extends Component {
 
         <p id={this.state.flashClass}>{this.state.flash}</p>
 
-        <div className={this.state.class}>
-          <i className="material-icons">brightness_3</i>
-          <h2 className="header">Moon Stats</h2>
-          <DataFeed data={this.state.moonData}/>
-          <div className="icon-link top">
-            <i className="material-icons">arrow_upward</i>
-            <a href="#top">Back to Top</a>
-          </div>
-        </div>
+        <DataContainer
+          class={this.state.class}
+          data={this.state.moonData} />
       </div>
     )
   }
