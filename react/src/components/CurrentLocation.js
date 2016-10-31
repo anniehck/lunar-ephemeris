@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DataFeed from './DataFeed';
+import CurrentLocationForm from './CurrentLocationForm';
 
 class CurrentLocation extends Component {
   constructor(props) {
@@ -9,11 +10,6 @@ class CurrentLocation extends Component {
       moonData: [],
       latitude: '',
       longitude: '',
-      location: '',
-      key: '',
-      city: '',
-      state: '',
-      zip: '',
       range: '',
       class: 'hidden',
       flash: '',
@@ -41,13 +37,13 @@ class CurrentLocation extends Component {
   }
 
   componentDidMount() {
-      $.ajax({
-        method: 'GET',
-        url: "/api/v1/locations"
-      })
-      .done(data => {
-        this.setState({ locationData: data })
-      });
+    $.ajax({
+      method: 'GET',
+      url: "/api/v1/locations"
+    })
+    .done(data => {
+      this.setState({ locationData: data })
+    });
   }
 
   handleCurrentLocation(event) {
@@ -70,7 +66,7 @@ class CurrentLocation extends Component {
       let flashType;
       let moonStats;
       if (data.errorMessages === undefined) {
-        message = 'Sucess!';
+        message = 'Success!';
         flashType = 'flash-notice';
         moonStats = data.data;
       } else {
@@ -111,33 +107,12 @@ class CurrentLocation extends Component {
         <p>{location.city}, {location.state} {location.zip}<br />
         latitude: {lat}, longitude: {lon}
         </p>
-        <form onSubmit={this.handleCurrentLocation}>
-        <div className="radio-field">
-        <label>See data for the next:</label><br />
-          <div className="buttons">
-            <div className="radio">
-            <label>Day</label>
-            <input type="radio" name="range" value="day" onChange={this.handleChange} />
-            </div>
-
-            <div className="radio">
-            <label>Week</label>
-            <input type="radio" name="range" value="week" onChange={this.handleChange} />
-            </div>
-
-            <div className="radio">
-            <label>Month</label>
-            <input type="radio" name="range" value="month" onChange={this.handleChange} />
-            </div>
-          </div>
-        </div>
+        <CurrentLocationForm
+         handleCurrentLocation={this.handleCurrentLocation}
+         handleChange={this.handleChange}
+         range={this.state.range} />
 
         <p id={this.state.flashClass}>{this.state.flash}</p>
-
-          <div className="submit">
-            <button type="submit">Use current location!</button>
-          </div>
-        </form>
 
         <div className={this.state.class}>
           <i className="material-icons">brightness_3</i>

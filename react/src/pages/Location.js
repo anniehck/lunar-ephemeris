@@ -66,8 +66,8 @@ class Location extends Component {
       type: 'POST',
       url: 'api/v1/locations',
       data: { location: formData }
-    }).success(data => {
-      debugger;
+    })
+    .success(data => {
       let message;
       let flashType;
       let moonStats;
@@ -90,7 +90,8 @@ class Location extends Component {
         moonData: moonStats,
         iconClass: 'material-icons bright'
       });
-    }).error(data => {
+    })
+    .error(data => {
       let message;
       let authorization = 'You need to sign in or sign up before continuing.';
       if (data.responseText === authorization) {
@@ -185,7 +186,7 @@ class Location extends Component {
         <i className="material-icons">{this.state.icon}</i>
 
         <div className={this.state.formClass}>
-          <CurrentLocation range={this.state.range} />
+          <CurrentLocation />
         </div>
 
         <a id="new"></a>
