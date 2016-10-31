@@ -11,6 +11,8 @@ https://lunar-ephemeris.herokuapp.com
 
 `git clone https://github.com/anniehck/moon-visualizer.git`
 
+`cd moon-visualizer`
+
 `bundle install`
 
 `npm install`
@@ -54,9 +56,9 @@ visit `localhost:3000` on your browser
 * [Astrocast](http://astrocast.herokuapp.com/bites)
 
 
-### Notes on Deployment with Heroku
-
 ======
+
+### Notes on Deployment with Heroku
 
 **Set production build process with Node & Ruby**
 
