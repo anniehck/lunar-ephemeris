@@ -31,6 +31,11 @@ class Reviews extends Component {
     setInterval(this.resetFlash, 15000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.refreshPage, 5000);
+    clearInterval(this.resetFlash, 15000);
+  }
+
   resetFlash() {
     if (this.state.flash !== '') {
       this.setState({ flash: '' });
@@ -100,7 +105,7 @@ class Reviews extends Component {
       user: this.state.user
     };
     let newReviews = [...this.state.reviews, newReview];
-    this.setState({ reviews: newReviews, title: '', body: '', rating: '' });
+      this.setState({ reviews: newReviews, title: '', body: '', rating: '' });
   }
 
   handleChange(event) {
